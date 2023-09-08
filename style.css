@@ -1,0 +1,14 @@
+.icon-hover:hover {
+    border-color: #3b71ca !important;
+    background-color: white !important;
+  }
+  
+  .icon-hover:hover i {
+    color: #3b71ca !important;
+  }
+  
+  .card-img-top{
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+  }
