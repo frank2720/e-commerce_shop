@@ -15,7 +15,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   if($count>0){
     echo "<script>alert('already exist!!')</script>";
   }else{
-
+    
+    //insert categories if it does not exist
     $sql_insert="INSERT INTO categories (category_title) VALUES ('$category')";
     $insert=$conn->exec($sql_insert);
 

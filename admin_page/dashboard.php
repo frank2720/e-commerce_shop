@@ -339,6 +339,10 @@
 
   <main id="main" class="main">
 
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+    </div><!-- End Page Title -->
+
     <div class="container">
         <?php
         if (isset($_GET['insert_category'])) {
@@ -346,10 +350,6 @@
         }
         ?>
     </div>
-
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-    </div><!-- End Page Title -->
 
     <section class="section dashboard">
       <div class="row">

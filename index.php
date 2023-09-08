@@ -1,3 +1,7 @@
+<?php
+//connect to database
+include_once 'database/connection.php';
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -83,13 +87,21 @@
                         </a>
                         <!-- Dropdown menu -->
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">1</a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#">2</a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#">3</a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#">4</a></li>
+                            <?php
+                            $select_category=$conn->prepare("SELECT * FROM categories");
+                            //execute query
+                            $select_category->execute();
+
+                            $r=$select_category->setFetchMode(PDO::FETCH_ASSOC);
+                            $result=$select_category->fetchAll();
+
+                            foreach ($result as $row) {
+                                echo "<li>
+                                <a class='dropdown-item' href=''>".$row['category_title']."</a>
+                                <li><hr class='dropdown-divider' /></li>
+                                </li>";
+                            }
+                            ?>
                         </ul>
                     </li>
                 </ul>
