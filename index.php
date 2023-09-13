@@ -119,135 +119,29 @@ include_once 'database/connection.php';
                 </header>
 
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                <h5 class="card-title">$29.95</h5>
-                                <p class="card-text">Modern product name here</p>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
-                                <a href="#" class="btn btn-secondary">View more</a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    $select_products=$conn->prepare("SELECT * FROM products");
+                    //execute query
+                    $select_products->execute();
 
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                <h5 class="card-title">$29.95</h5>
-                                <p class="card-text">Modern product name here</p>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
-                                <a href="#" class="btn btn-secondary">View more</a>
-                            </div>
-                        </div>
-                    </div>
+                    $r=$select_products->setFetchMode(PDO::FETCH_ASSOC);
+                    $result=$select_products->fetchAll();
 
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                <h5 class="card-title">$29.95</h5>
-                                <p class="card-text">Modern product name here</p>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
-                                <a href="#" class="btn btn-secondary">View more</a>
+                    foreach ($result as $column){
+                        echo "<div class='col-lg-3 col-md-6 col-sm-6 mb-2'>
+                        <div class='card' style='width: 18rem;'>
+                            <img src='admin_page/actions/".$column['product_image']."' class='card-img-top' alt='".$column['product_name']." image'>
+                            <div class='card-body'>
+                                <a href='#!' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
+                                <h5 class='card-title'>Ksh. ".$column['price']."</h5>
+                                <p class='card-text'>".$column['product_description']."</p>
+                                <a href='#' class='btn btn-primary'>Add to cart</a>
+                                <a href='#' class='btn btn-secondary'>View more</a>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-2 mb-2">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                <h5 class="card-title">$29.95</h5>
-                                <p class="card-text">Modern product name here</p>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
-                                <a href="#" class="btn btn-secondary">View more</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                <h5 class="card-title">$29.95</h5>
-                                <p class="card-text">Modern product name here</p>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
-                                <a href="#" class="btn btn-secondary">View more</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                <h5 class="card-title">$29.95</h5>
-                                <p class="card-text">Modern product name here</p>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
-                                <a href="#" class="btn btn-secondary">View more</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                <h5 class="card-title">$29.95</h5>
-                                <p class="card-text">Modern product name here</p>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
-                                <a href="#" class="btn btn-secondary">View more</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                <h5 class="card-title">$29.95</h5>
-                                <p class="card-text">Modern product name here</p>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
-                                <a href="#" class="btn btn-secondary">View more</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                <h5 class="card-title">$29.95</h5>
-                                <p class="card-text">Modern product name here</p>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
-                                <a href="#" class="btn btn-secondary">View more</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.webp" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                <h5 class="card-title">$29.95</h5>
-                                <p class="card-text">Modern product name here</p>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
-                                <a href="#" class="btn btn-secondary">View more</a>
-                            </div>
-                        </div>
-                    </div>
+                    </div>";
+                    }
+                    ?>
                 </div>
             </div>
         </section>
