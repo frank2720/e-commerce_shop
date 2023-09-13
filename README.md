@@ -1,2 +1,2 @@
 # e-commerce shop
-Build using Php, mysql and JS and CSS
+Build using Php, MySQL and Bootstrap 5.0( JS and CSS)
