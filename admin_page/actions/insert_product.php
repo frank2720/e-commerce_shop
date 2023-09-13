@@ -3,26 +3,32 @@
 include_once '../../database/connection.php';
 
 
-if($_SERVER['REQUEST_METHOD']=='POST'){
+if(isset($_POST['upload'])){
     // defining values
     $name=$_POST['product_name'];
     $cat=$_POST['product_category'];
     $price=$_POST['product_price'];
     $description=$_POST['about_product'];
 
-    //images directory 
-    $imagedir = 'uploads/';
-
     //accessing image
-    $image=$imagedir . basename($_FILES['productimage']['name']);
-    //accessing image tmp_name and uploading it.
-    move_uploaded_file($_FILES['productimage']['tmp_name'],$image);
-
-    $sql="INSERT INTO products (product_name,category,price,product_image,product_description) VALUES ('$name','$cat','$price','$image','$description')";
-    $insert=$conn->exec($sql);
-    if($insert){
-        echo "<script>alert('product added sucessfully')</script>";
+    $uploaddir = 'uploads/';
+    $imagename=$_FILES['productimage']['name'];
+    $tempname = $_FILES['productimage']['tmp_name'];
+    echo '<pre>';
+    if(move_uploaded_file($tempname,$uploaddir)){
+        echo "File is valid, and was successfully uploaded.\n";
+    }else{
+        echo "Possible file upload attack!\n";
     }
+
+    echo 'Here is some more debugging info:';
+    print_r($_FILES);
+    print "</pre>";
+    //$sql="INSERT INTO products (product_name,category,price,product_image,product_description) VALUES ('$name','$cat','$price','$imagename','$description')";
+    //$insert=$conn->exec($sql);
+    //if($insert){
+      //  echo "<script>alert('product added sucessfully')</script>";
+    //}
 }
 ?>
 
@@ -45,7 +51,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         <link rel="stylesheet" href="style.css">
     </head>
     <body class="p-3 mb-2 bg-secondary text-white">
-        <form class="mx-auto p" style="width: 200px;" enctype="multipart/form-data" action="" method="POST">
+        <div class="mx-auto p" style="width: 200px;">
+        <form enctype="multipart/form-data" action="" method="POST">
             <div class="form-group mb-3">
                 <label for="ProductName">Product name</label>
                 <input type="text" class="form-control form-control-sm" id="ProductName" name="product_name" required>
@@ -74,17 +81,15 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 </select>
             </div>
             <div>
-                <!-- MAX_FILE_SIZE must precede the file input field -->
-                <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                <!-- Name of input element determines name in $_FILES array -->
-                <input name="productimage" type="file" />
+                <input name="productimage" class="form-control" type="file" value="" />
             </div>
             <div class="form-group mb-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" id="description" name="about_product" required></textarea>
             </div>
-            <input type="submit" class="btn btn-primary" value="Add product">
+            <button type="submit" class="btn btn-primary" name="upload">Add product</button>
         </form>
+        </div>
         <!--bootstrap Js link -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     </body>
