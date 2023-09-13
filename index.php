@@ -95,9 +95,9 @@ include_once 'database/connection.php';
                             $r=$select_category->setFetchMode(PDO::FETCH_ASSOC);
                             $result=$select_category->fetchAll();
 
-                            foreach ($result as $row) {
+                            foreach ($result as $column) {
                                 echo "<li>
-                                <a class='dropdown-item' href=''>".$row['category_title']."</a>
+                                <a class='dropdown-item' href='index.php?category_id=".$column['category_id']."'>".$column['category_title']."</a>
                                 <li><hr class='dropdown-divider' /></li>
                                 </li>";
                             }

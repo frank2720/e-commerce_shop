@@ -302,7 +302,7 @@
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a href="actions/insert_product.php">
               <i class="bi bi-circle"></i><span>Insert Products</span>
             </a>
           </li>
