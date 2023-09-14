@@ -12,23 +12,18 @@ if(isset($_POST['upload'])){
 
     //accessing image
     $uploaddir = 'uploads/';
-    $imagename=$_FILES['productimage']['name'];
+    $imagename=$uploaddir . basename($_FILES['productimage']['name']);
     $tempname = $_FILES['productimage']['tmp_name'];
     echo '<pre>';
-    if(move_uploaded_file($tempname,$uploaddir)){
-        echo "File is valid, and was successfully uploaded.\n";
+    if(move_uploaded_file($tempname,$imagename)){
+        $sql="INSERT INTO products (product_name,category,price,product_image,product_description) VALUES ('$name','$cat','$price','$imagename','$description')";
+        $insert=$conn->exec($sql);
+        if($insert){
+            echo "<script>alert('product added successfully')</script>";
+        }
     }else{
-        echo "Possible file upload attack!\n";
+        echo "<script>alert('possible file upload attack!')</script>";
     }
-
-    echo 'Here is some more debugging info:';
-    print_r($_FILES);
-    print "</pre>";
-    //$sql="INSERT INTO products (product_name,category,price,product_image,product_description) VALUES ('$name','$cat','$price','$imagename','$description')";
-    //$insert=$conn->exec($sql);
-    //if($insert){
-      //  echo "<script>alert('product added sucessfully')</script>";
-    //}
 }
 ?>
 
@@ -60,7 +55,7 @@ if(isset($_POST['upload'])){
             <div class="form-group mb-3">
                 <label for="ProductName">Price</label>
                 <div class="input-group">
-                    <span class="input-group-text">$</span>
+                    <span class="input-group-text">Ksh</span>
                     <input type="text" class="form-control form-control-sm" id="Productprice" name="product_price" required>
                 </div>
             </div>

@@ -98,7 +98,6 @@ include_once 'database/connection.php';
                             foreach ($result as $column) {
                                 echo "<li>
                                 <a class='dropdown-item' href='index.php?category_id=".$column['category_id']."'>".$column['category_title']."</a>
-                                <li><hr class='dropdown-divider' /></li>
                                 </li>";
                             }
                             ?>

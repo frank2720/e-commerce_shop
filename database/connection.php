@@ -2,7 +2,7 @@
 //define database credentials
 $host='localhost';
 $username='root';
-$password ='2720';
+$password ='Frank2720';
 $db_name='mystore';
 
 //database connection while catching exception
