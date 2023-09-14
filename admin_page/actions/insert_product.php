@@ -1,8 +1,6 @@
 <?php
 //connect to database
 include_once '../../database/connection.php';
-
-
 if(isset($_POST['upload'])){
     // defining values
     $name=$_POST['product_name'];
@@ -26,7 +24,6 @@ if(isset($_POST['upload'])){
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -45,7 +42,7 @@ if(isset($_POST['upload'])){
         <!--css file-->
         <link rel="stylesheet" href="style.css">
     </head>
-    <body class="p-3 mb-2 bg-secondary text-white">
+    <body class="p-3 bg-secondary text-white">
         <div class="mx-auto p" style="width: 200px;">
         <form enctype="multipart/form-data" action="" method="POST">
             <div class="form-group mb-3">

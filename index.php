@@ -119,7 +119,7 @@ include_once 'database/connection.php';
 
                 <div class="row">
                     <?php
-                    $select_products=$conn->prepare("SELECT * FROM products");
+                    $select_products=$conn->prepare("SELECT * FROM products ORDER BY RAND()");
                     //execute query
                     $select_products->execute();
 
@@ -132,7 +132,7 @@ include_once 'database/connection.php';
                             <img src='admin_page/actions/".$column['product_image']."' class='card-img-top' alt='".$column['product_name']." image'>
                             <div class='card-body'>
                                 <a href='#!' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
-                                <h5 class='card-title'>Ksh. ".$column['price']."</h5>
+                                <h5 class='card-title'>".$column['product_name']."</h5>
                                 <p class='card-text'>".$column['product_description']."</p>
                                 <a href='#' class='btn btn-primary'>Add to cart</a>
                                 <a href='#' class='btn btn-secondary'>View more</a>
