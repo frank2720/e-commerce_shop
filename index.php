@@ -108,6 +108,7 @@ include_once 'functions/common.php';
                 <div class="row">
                     <?php
                     getproducts();
+                    category_products();
                     ?>
                 </div>
             </div>

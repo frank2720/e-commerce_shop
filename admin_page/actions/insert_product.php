@@ -1,7 +1,7 @@
 <?php
 //connect to database
 include_once '../../database/connection.php';
-if(isset($_POST['upload'])){
+if($_SERVER['REQUEST_METHOD']=='POST'){
     // defining values
     $name=$_POST['product_name'];
     $cat=$_POST['product_category'];
@@ -14,7 +14,7 @@ if(isset($_POST['upload'])){
     $tempname = $_FILES['productimage']['tmp_name'];
     echo '<pre>';
     if(move_uploaded_file($tempname,$imagename)){
-        $sql="INSERT INTO products (product_name,category,price,product_image,product_description) VALUES ('$name','$cat','$price','$imagename','$description')";
+        $sql="INSERT INTO products (product_name,category_id,price,product_image,product_description) VALUES ('$name','$cat','$price','$imagename','$description')";
         $insert=$conn->exec($sql);
         if($insert){
             echo "<script>alert('product added successfully')</script>";
@@ -67,7 +67,7 @@ if(isset($_POST['upload'])){
                     $result=$sql->fetchAll();
 
                     foreach ($result as $column) {
-                        echo "<option>".$column['category_title']."</option>";
+                        echo "<option value=".$column['category_id'].">".$column['category_title']."</option>";
                     }
                     ?>
                 </select>
