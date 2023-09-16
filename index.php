@@ -1,6 +1,5 @@
 <?php
-//connect to database
-include_once 'database/connection.php';
+include_once 'functions/common.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -88,7 +87,6 @@ include_once 'database/connection.php';
                         <!-- Dropdown menu -->
                         <ul class="dropdown-menu">
                             <?php
-                            include_once 'functions/common.php';
                             getcategories();
                             ?>
                         </ul>
@@ -109,7 +107,6 @@ include_once 'database/connection.php';
 
                 <div class="row">
                     <?php
-                    include_once 'functions/common.php';
                     getproducts();
                     ?>
                 </div>

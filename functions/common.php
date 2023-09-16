@@ -12,13 +12,21 @@ function getproducts(){
     $result=$select_products->fetchAll();
     
     foreach ($result as $column){
+        //displaying text with more than 50 characters
+        $text = $column['product_description'];
+        $maxPos = 50;
+        if (strlen($text) > $maxPos)
+        {
+            $lastPos = ($maxPos - 3) - strlen($text);
+            $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
+        }
         echo "<div class='col-lg-3 col-md-6 col-sm-6 mb-2'>
         <div class='card' style='width: 18rem;'>
         <img src='admin_page/actions/".$column['product_image']."' class='card-img-top' alt='".$column['product_name']." image'>
         <div class='card-body'>
         <a href='#!' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
-        <h5 class='card-title'>".$column['product_name']."</h5>
-        <p class='card-text'>".$column['product_description']."</p>
+        <small><p class='card-title'><b>".$column['product_name']."</b></p></small>
+        <p class='card-text'>".$text."</p>
         <a href='#' class='btn btn-primary'>Add to cart</a>
         <a href='#' class='btn btn-secondary'>View more</a>
         </div>
