@@ -47,7 +47,12 @@ function search_products(){
     $select_products=$conn->prepare("SELECT * FROM products WHERE keywords LIKE '%$product_value%' ORDER BY RAND()");
     //execute query
     $select_products->execute();
-    
+
+    $count=$select_products->rowCount();
+
+    if($count==0){
+        echo "<small class='text-center text-danger h5'>Product not available</small>";
+    }
     $r=$select_products->setFetchMode(PDO::FETCH_ASSOC);
     $result=$select_products->fetchAll();
     
