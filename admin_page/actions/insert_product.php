@@ -6,6 +6,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $name=$_POST['product_name'];
     $cat=$_POST['product_category'];
     $price=$_POST['product_price'];
+    $keywords=$_POST['product_keywords'];
     $description=$_POST['about_product'];
 
     //accessing image
@@ -14,7 +15,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $tempname = $_FILES['productimage']['tmp_name'];
     echo '<pre>';
     if(move_uploaded_file($tempname,$imagename)){
-        $sql="INSERT INTO products (product_name,category_id,price,product_image,product_description) VALUES ('$name','$cat','$price','$imagename','$description')";
+        $sql="INSERT INTO products (product_name,keywords,category_id,price,product_image,product_description) VALUES ('$name',,'$keywords',$cat','$price','$imagename','$description')";
         $insert=$conn->exec($sql);
         if($insert){
             echo "<script>alert('product added successfully')</script>";
@@ -40,24 +41,42 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         <!--font awesome link-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!--css file-->
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="stylesheet.css">
     </head>
-    <body class="p-3 bg-secondary text-white">
-        <div class="mx-auto p" style="width: 200px;">
+    <body class="font-monospace">
+        <div class="container">
         <form enctype="multipart/form-data" action="" method="POST">
-            <div class="form-group mb-3">
-                <label for="ProductName">Product name</label>
-                <input type="text" class="form-control form-control-sm" id="ProductName" name="product_name" required>
-            </div>
-            <div class="form-group mb-3">
-                <label for="ProductName">Price</label>
-                <div class="input-group">
-                    <span class="input-group-text">Ksh</span>
-                    <input type="text" class="form-control form-control-sm" id="Productprice" name="product_price" required>
+            <div class="row">
+                <div class="col-25">
+                    <label for="ProductName">Product name</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="ProductName" placeholder="Enter product name" name="product_name" required>
                 </div>
             </div>
-            <div class="form-group mb-3">
-                <select class="form-select" id="category" required name="product_category">
+            <div class="row">
+                <div class="col-25">
+                    <label for="keywords">Keywords</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="keywords" name="product_keywords" placeholder="keywords for product search" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="ProductName">Price</label>
+                </div>
+                <div class=" col-75">
+                    <input type="number" id="Productprice" name="product_price" min="1" placeholder="Kenya shillings" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="category">Category</label>
+                </div>
+
+                <div class="col-75">
+                <select id="category" required name="product_category">
                     <option selected disabled class="text-primary">Select category</option>
                     <?php
                     $sql=$conn->prepare("SELECT * FROM categories");
@@ -71,15 +90,27 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     }
                     ?>
                 </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="image">Product Image</label>
+                </div>
+                <div class="col-75">
+                    <input name="productimage" id="image" type="file" value="" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="description" class="form-label">Description</label>
+                </div>
+                <div class="col-75">
+                    <textarea class="form-control" id="description" name="about_product" placeholder="Describe the product" style="height:200px" required></textarea>
+                </div>
             </div>
             <div>
-                <input name="productimage" class="form-control" type="file" value="" />
+                <button type="submit" class="btn btn-primary" name="upload">Add product</button>
             </div>
-            <div class="form-group mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="about_product" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" name="upload">Add product</button>
         </form>
         </div>
         <!--bootstrap Js link -->
