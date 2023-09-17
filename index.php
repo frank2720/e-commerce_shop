@@ -19,14 +19,14 @@ include_once 'functions/common.php';
         <!--css file-->
         <link rel="stylesheet" href="style.css">
     </head>
-    <body>
+    <body class="font-monospace">
         <header>
             <div class="p-3 text-center bg-white border-bottom">
                 <div class="container">
                     <div class="row gy-3">
                         <!--Left elements-->
                          <div class="col-lg-2 col-sm-4 col-4">
-                            <a href="" class="float-start">
+                            <a href="index.php" class="float-start">
                                 <img src="images/7660092.jpg" height="60" />
                             </a>
                         </div>
@@ -71,7 +71,7 @@ include_once 'functions/common.php';
                 <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" aria-current="page" href="#">Home</a>
+                        <a class="nav-link text-dark" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="#">Hot offers</a>
@@ -102,7 +102,7 @@ include_once 'functions/common.php';
         <section>
             <div class="container my-5">
                 <header class="mb-4">
-                    <h3>products</h3>
+                    <p class='h5 text-primary'>Products</p>
                 </header>
 
                 <div class="row">
