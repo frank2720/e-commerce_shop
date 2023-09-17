@@ -40,7 +40,7 @@ include_once 'functions/common.php';
                         </div>
                         <!-- Right elements -->
                         <div class="col-lg-5 col-md-12 col-12">
-                            <form action="display_search.php" method="get">
+                            <form action="" method="get">
                                 <div class="input-group float-center">
                                     <input type="search" class="form-control" placeholder="Search" name="search_product" />
                                     <button type="submit" class="btn btn-primary shadow-0 icon-hover" :hover value="search" name="search_data_product"><i class="fas fa-search"></i></button>
@@ -107,7 +107,7 @@ include_once 'functions/common.php';
 
                 <div class="row">
                     <?php
-                    getproducts();
+                    search_products();
                     category_products();
                     ?>
                 </div>

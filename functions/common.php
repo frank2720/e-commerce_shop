@@ -37,6 +37,44 @@ function getproducts(){
     }
 }
 }
+
+# search products
+function search_products(){
+    global $conn;
+    if (isset($_GET['search_data_product'])) {
+        $product_value=$_GET['search_product'];
+    
+    $select_products=$conn->prepare("SELECT * FROM products WHERE keywords LIKE '%$product_value%' ORDER BY RAND()");
+    //execute query
+    $select_products->execute();
+    
+    $r=$select_products->setFetchMode(PDO::FETCH_ASSOC);
+    $result=$select_products->fetchAll();
+    
+    foreach ($result as $column){
+        //displaying text with more than 50 characters
+        $text = $column['product_description'];
+        $maxPos = 50;
+        if (strlen($text) > $maxPos)
+        {
+            $lastPos = ($maxPos - 3) - strlen($text);
+            $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
+        }
+        echo "<div class='col-lg-3 col-md-6 col-sm-6 mb-2'>
+        <div class='card' style='width: 18rem;'>
+        <img src='admin_page/actions/".$column['product_image']."' class='card-img-top' alt='".$column['product_name']." image'>
+        <div class='card-body'>
+        <a href='#!' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
+        <p class='card-text'>".$text."</p>
+        <small><p class='card-title'><b>".$column['product_name'].":- Ksh ".number_format($column['price'])."</b></p></small>
+        <a href='#' class='btn btn-primary'>Add to cart</a>
+        <a href='#' class='btn btn-secondary'>View more</a>
+        </div>
+        </div>
+        </div>";
+    }
+}
+}
 //getting products from specific categories
 function category_products(){
     global $conn;
