@@ -33,8 +33,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         <title>Insert products</title>
 
         <!-- Favicons -->
-        <link href="images/7660092.jpg" rel="icon">
-        <link href="images/7660092.jpg" rel="apple-touch-icon">
+        <link href="../assets/img/logo.jpg" rel="icon">
+        <link href="../assets/img/logo.jpg" rel="apple-touch-icon">
 
         <!-- bootstrap CSS link -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -43,7 +43,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         <!--css file-->
         <link rel="stylesheet" href="stylesheet.css">
     </head>
-    <body class="font-monospace">
+    <body class="font-monospace bg-light">
         <div class="container">
         <form enctype="multipart/form-data" action="" method="POST">
             <div class="row">
@@ -59,7 +59,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     <label for="keywords">Keywords</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="keywords" name="product_keywords" placeholder="keywords for product search" required>
+                    <input type="text" id="keywords" name="product_keywords" placeholder="keywords for product search e.g phone,laptop,Oppo,HP" required>
                 </div>
             </div>
             <div class="row">
@@ -105,7 +105,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     <label for="description" class="form-label">Description</label>
                 </div>
                 <div class="col-75">
-                    <textarea class="form-control" id="description" name="about_product" placeholder="Describe the product" style="height:200px" required></textarea>
+                    <textarea id="description" name="about_product" placeholder="Write a short description about the product..." style="height:200px" required></textarea>
                 </div>
             </div>
             <div>
