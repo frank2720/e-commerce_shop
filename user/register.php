@@ -1,5 +1,5 @@
 <?php
-include_once 'models/user.php';
+include_once 'models/user_registration.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
