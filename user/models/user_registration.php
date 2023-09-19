@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             #using password hashing
             $stmt1 = $conn->prepare("INSERT INTO users (username,password,email,phone) VALUES ('$username','$hash','$email','$phone')");
             if($stmt1->execute()){
-                echo "<script>alert('account created successfully')</script>";
+                header('Location: login.php');
             }
         }else{
             echo "<script>alert('password does not match')</script>"; 
