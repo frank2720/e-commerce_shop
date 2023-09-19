@@ -13,16 +13,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
 	$username = user_input($_POST["username"]);
 	$password = user_input($_POST["password"]);
-	$stmt = $conn->prepare("SELECT * FROM users WHERE username='$username' AND password='$password'");
+	$stmt = $conn->prepare("SELECT * FROM users WHERE username='$username'");
 	$stmt->execute();
 	$count = $stmt->rowCount();
+
+	$stmt->setFetchMode(PDO::FETCH_ASSOC);
+	$users=$stmt->fetchAll();
     
     if($count==1) {
-        header("location: user_page.php");
+		foreach ($users as $user) {
+			if(password_verify($password,$user['password'])){
+				header("location: user_page.php");
+			}else {
+				echo "<script language='javascript'>";
+				echo "alert('password is incorrect!')";
+				echo "</script>";
+			}
+		}
     }
     else {
         echo "<script language='javascript'>";
-        echo "alert('wrong information')";
+        echo "alert('no user found')";
         echo "</script>";
     }
 	
