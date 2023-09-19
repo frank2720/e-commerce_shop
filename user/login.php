@@ -26,17 +26,18 @@ include_once 'models/user.php';
             <div class="textbox">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <input type="text" placeholder="Username"
-                         name="username" value="">
+                         name="username" value="" required>
             </div>
  
             <div class="textbox">
                 <i class="fa fa-lock" aria-hidden="true"></i>
                 <input type="password" placeholder="Password"
-                         name="password" value="">
+                         name="password" value="" required>
             </div>
  
             <input class="button" type="submit"
                      name="login" value="Sign In">
+            <p>Do not have an account?<small><a href="register.php">Register</a></small></p>
         </div>
     </form>
 </body>

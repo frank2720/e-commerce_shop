@@ -42,7 +42,7 @@ include_once 'functions/common.php';
                         <div class="col-lg-5 col-md-12 col-12">
                             <form action="display_search.php" method="get">
                                 <div class="input-group float-center">
-                                    <input type="search" class="form-control" placeholder="Search" name="search_product" />
+                                    <input type="search" class="form-control" placeholder="search product" name="search_product" />
                                     <button type="submit" class="btn btn-primary shadow-0 icon-hover" :hover value="search" name="search_data_product"><i class="fas fa-search"></i></button>
                                 </div>
                             </form>
