@@ -13,9 +13,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $uploaddir = 'uploads/';
     $imagename=$uploaddir . basename($_FILES['productimage']['name']);
     $tempname = $_FILES['productimage']['tmp_name'];
-    echo '<pre>';
+
     if(move_uploaded_file($tempname,$imagename)){
-        $sql="INSERT INTO products (product_name,keywords,category_id,price,product_image,product_description) VALUES ('$name',,'$keywords',$cat','$price','$imagename','$description')";
+        $sql="INSERT INTO products (product_name,category_id,price,product_image,keywords,product_description) VALUES ('$name','$cat','$price','$imagename','$keywords','$description')";
         $insert=$conn->exec($sql);
         if($insert){
             echo "<script>alert('product added successfully')</script>";

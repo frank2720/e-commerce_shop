@@ -33,9 +33,6 @@
         <!-- Grid column -->
         <div class="col-12 col-lg-3 col-sm-12">
           <!-- Content -->
-          <a href="" target="_blank" class="ms-md-2">
-            <img src="images/7660092.jpg" height="60" />
-          </a>
           <p class="mt-3">
             © 2023 Copyright: Pudfra.com.
           </p>

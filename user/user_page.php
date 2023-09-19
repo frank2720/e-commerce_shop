@@ -1,5 +1,5 @@
 <?php
-include_once 'functions/common.php';
+include_once 'models/connectivity.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,15 +9,15 @@ include_once 'functions/common.php';
         <title>Pudfra-Shop</title>
 
         <!-- Favicons -->
-        <link href="images/7660092.jpg" rel="icon">
-        <link href="images/7660092.jpg" rel="apple-touch-icon">
+        <link href="../images/7660092.jpg" rel="icon">
+        <link href="../images/7660092.jpg" rel="apple-touch-icon">
 
         <!-- bootstrap CSS link -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <!--font awesome link-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!--css file-->
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../style.css">
     </head>
     <body class="font-monospace">
         <header>
@@ -26,8 +26,8 @@ include_once 'functions/common.php';
                     <div class="row gy-3">
                         <!--Left elements-->
                          <div class="col-lg-2 col-sm-4 col-4">
-                            <a href="index.php" class="float-start">
-                                <img src="images/7660092.jpg" height="60" />
+                            <a href="user_page.php" class="float-start">
+                                <img src="../images/7660092.jpg" height="60" />
                             </a>
                         </div>
                         <!--center elements-->
@@ -40,7 +40,7 @@ include_once 'functions/common.php';
                         </div>
                         <!-- Right elements -->
                         <div class="col-lg-5 col-md-12 col-12">
-                            <form action="display_search.php" method="get">
+                            <form action="../display_search.php" method="get">
                                 <div class="input-group float-center">
                                     <input type="search" class="form-control" placeholder="Search" name="search_product" />
                                     <button type="submit" class="btn btn-primary shadow-0 icon-hover" :hover value="search" name="search_data_product"><i class="fas fa-search"></i></button>
@@ -116,7 +116,7 @@ include_once 'functions/common.php';
         
         <!-- Products -->
 <?php
-include_once 'common_parts/footer.php'
+include_once '../common_parts/footer.php'
 ?>
 <!--bootstrap Js link -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
