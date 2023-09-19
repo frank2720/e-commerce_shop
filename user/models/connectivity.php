@@ -107,7 +107,7 @@ function category_products(){
         }
         echo "<div class='col-lg-3 col-md-6 col-sm-6 mb-2'>
         <div class='card' style='width: 18rem;'>
-        <img src='admin_page/actions/".$column['product_image']."' class='card-img-top' alt='".$column['product_name']." image'>
+        <img src='../admin_page/actions/".$column['product_image']."' class='card-img-top' alt='".$column['product_name']." image'>
         <div class='card-body'>
         <a href='#!' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
         <p class='card-text'>".$text."</p>
@@ -134,7 +134,7 @@ function getcategories(){
     
     foreach ($result as $column) {
         echo "<li>
-        <a class='dropdown-item' href='index.php?category_id=".$column['category_id']."'>".$column['category_title']."</a>
+        <a class='dropdown-item' href='user_page.php?category_id=".$column['category_id']."'>".$column['category_title']."</a>
         </li>";
     }
 }
