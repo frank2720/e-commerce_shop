@@ -33,7 +33,7 @@ include_once 'models/connectivity.php';
                         <!--center elements-->
                         <div class="order-lg-last col-lg-5 col-sm-8 col-8">
                             <div class="d-flex float-end">
-                                <a href="user_registration_login/login.php" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="fas fa-user-alt m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Sign in</p> </a>
+                                <a href="" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="fas fa-user-alt m-1 me-md-2"></i><p class="d-none d-md-block mb-0">username</p> </a>
                                 <a href="" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="fas fa-heart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Wishlist</p> </a>
                                 <a href="" class="border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="fas fa-shopping-cart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">My cart</p> </a>
                             </div>
@@ -71,7 +71,7 @@ include_once 'models/connectivity.php';
                 <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link text-dark" aria-current="page" href="user_page.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="#">Hot offers</a>
