@@ -26,10 +26,10 @@ function getproducts(){
         <div class='card' style='width: 18rem;'>
         <img src='../admin_page/actions/".$column['product_image']."' class='card-img-top' alt='".$column['product_name']." image'>
         <div class='card-body'>
-        <a href='#!' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
+        <a href='' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
         <p class='card-text'>".$text."</p>
         <small><p class='card-title'><b>".$column['product_name'].":- Ksh ".number_format($column['price'])."</b></p></small>
-        <a href='#' class='btn btn-primary'>Add to cart</a>
+        <a href='' class='btn btn-primary'>Add to cart</a>
         <a href='../product_details.php?product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
         </div>
         </div>
