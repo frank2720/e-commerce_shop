@@ -109,6 +109,8 @@ include_once 'functions/common.php';
                     <?php
                     getproducts();
                     category_products();
+                    $ip = getIPAddress(); 
+                    echo 'User Real IP Address - '.$ip;  
                     ?>
                 </div>
             </div>
