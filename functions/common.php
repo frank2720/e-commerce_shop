@@ -31,8 +31,16 @@ function getproducts(){
         <small><p class='card-title'><b>".$column['product_name'].":- Ksh ".number_format($column['price'],2)."</b></p></small>
         <div class='card-footer'>
         <form>
-        <input type='hidden' value=''>
-        <button class='btn btn-primary'>Add to cart</button>
+        <input type='hidden' value='".$column['product_id']."'>
+        <input type='hidden' value='".$column['product_name']."'>
+        <input type='hidden' value='".$column['category_id']."'>
+        <input type='hidden' value='".$column['price']."'>
+        <input type='hidden' value='".$column['product_image']."'>
+        <input type='hidden' value='".$column['keywords']."'>
+        <input type='hidden' value='".$column['price']."'>
+        <input type='hidden' value='".$column['product_description']."'>
+        <input type='hidden' value='".$column['time_added']."'>
+        <button id='addItem' class='btn btn-primary'>Add to cart</button>
         <a href='product_details.php?product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
         </form>
         </div>
