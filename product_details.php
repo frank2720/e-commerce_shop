@@ -77,23 +77,11 @@ include_once 'functions/common.php';
             <div class="col-md-6 mb-4">
                 <!--Content-->
                 <div class="p-4">
-                    <div class="mb-3">
-                        <a href="">
-                            <span class="badge bg-dark me-1">Category 2</span>
-                        </a>
-                        <a href="">
-                            <span class="badge bg-info me-1">New</span>
-                        </a>
-                        <a href="">
-                            <span class="badge bg-danger me-1">Bestseller</span>
-                        </a>
-                    </div>
-
                     <p class="lead">
                         <span class="me-1">
-                            <del>$200</del>
+                            <del>Ksh 200</del>
                         </span>
-                        <span>$100</span>
+                        <span>Ksh 100</span>
                     </p>
 
                     <strong><p style="font-size: 20px;">Description</p></strong>

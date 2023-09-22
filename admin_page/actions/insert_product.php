@@ -10,20 +10,36 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $description=$_POST['about_product'];
 
     //accessing image
-    $uploaddir = 'uploads/';
-    $imagename=$uploaddir . basename($_FILES['productimage']['name']);
-    $tempname = $_FILES['productimage']['tmp_name'];
+    
+	$extension = array("jpeg", "jpg", "png");
+	$uploaddir = 'uploads/';
 
-    if(move_uploaded_file($tempname,$imagename)){
-        $sql="INSERT INTO products (product_name,category_id,price,product_image,keywords,product_description) VALUES ('$name','$cat','$price','$imagename','$keywords','$description')";
-        $insert=$conn->exec($sql);
-        if($insert){
-            echo "<script>alert('product added successfully')</script>";
+    foreach ($_FILES['productimage']['tmp_name'] as $key => $tmp_name) {
+            
+            $imagename=$uploaddir . basename($_FILES['productimage']['name'][$key]);
+            $tempname = $_FILES['productimage']['tmp_name'][$key];
+
+            $uploadOk = true;
+            $ext = pathinfo($imagename,PATHINFO_EXTENSION);
+
+            if (in_array($ext,$extension)==false) {
+                $uploadOk = false;
+            }
+
+            if ($uploadOk == true) {
+                move_uploaded_file($tempname,$imagename);
+                
+                $sql="INSERT INTO products (product_name,category_id,price,product_image,keywords,product_description) VALUES ('$name','$cat','$price','$imagename','$keywords','$description')";
+                $insert=$conn->exec($sql);
+                
+                if ($insert) {
+                    echo "<script>alert('product added successfully')</script>";
+                }else {
+                    echo "<script>alert('possible file upload attack!')</script>";
+                }
+            }
         }
-    }else{
-        echo "<script>alert('possible file upload attack!')</script>";
     }
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -97,7 +113,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     <label for="image">Product Image</label>
                 </div>
                 <div class="col-75">
-                    <input name="productimage" id="image" type="file" value="" required/>
+                    <input name="productimage[]" id="image" type="file" value="" required multiple/>
                 </div>
             </div>
             <div class="row">
