@@ -29,8 +29,13 @@ function getproducts(){
         <a href='#!' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
         <p class='card-text'>".$text."</p>
         <small><p class='card-title'><b>".$column['product_name'].":- Ksh ".number_format($column['price'],2)."</b></p></small>
-        <a href='#' class='btn btn-primary'>Add to cart</a>
+        <div class='card-footer'>
+        <form>
+        <input type='hidden' value=''>
+        <button class='btn btn-primary'>Add to cart</button>
         <a href='product_details.php?product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
+        </form>
+        </div>
         </div>
         </div>
         </div>";
