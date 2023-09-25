@@ -28,22 +28,9 @@ function getproducts(){
         <div class='card-body'>
         <a href='#!' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
         <p class='card-text'>".$text."</p>
-        <small><p class='card-title'><b>".$column['product_name'].":- Ksh ".number_format($column['price'],2)."</b></p></small>
-        <div class='card-footer'>
-        <form>
-        <input type='hidden' value='".$column['product_id']."'>
-        <input type='hidden' value='".$column['product_name']."'>
-        <input type='hidden' value='".$column['category_id']."'>
-        <input type='hidden' value='".$column['price']."'>
-        <input type='hidden' value='".$column['product_image']."'>
-        <input type='hidden' value='".$column['keywords']."'>
-        <input type='hidden' value='".$column['price']."'>
-        <input type='hidden' value='".$column['product_description']."'>
-        <input type='hidden' value='".$column['time_added']."'>
-        <button id='addItem' class='btn btn-primary'>Add to cart</button>
+        <small><p class='card-title'><b>".$column['product_name'].":- Ksh ".number_format($column['price'])."</b></p></small>
+        <a href='#' class='btn btn-primary'>Add to cart</a>
         <a href='product_details.php?product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
-        </form>
-        </div>
         </div>
         </div>
         </div>";
@@ -122,10 +109,10 @@ function category_products(){
         <div class='card' style='width: 18rem;'>
         <img src='admin_page/actions/".$column['product_image']."' class='card-img-top' alt='".$column['product_name']." image'>
         <div class='card-body'>
-        <a href='' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
+        <a href='#!' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
         <p class='card-text'>".$text."</p>
         <small><p class='card-title'><b>".$column['product_name'].":- Ksh ".number_format($column['price'])."</b></p></small>
-        <a href='' class='btn btn-primary'>Add to cart</a>
+        <a href='#' class='btn btn-primary'>Add to cart</a>
         <a href='product_details.php?product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
         </div>
         </div>
@@ -152,21 +139,47 @@ function getcategories(){
     }
 }
 
-//getting user ipAdress
+// Template header, feel free to customize this
+function template_header($title) {
+    echo <<<EOT
+    <!DOCTYPE html>
+    <html>
+        <head>
+        <meta charset="utf-8">
+        <meta nname="viewport" content="width=device-width, initial-scale=1">
+        <title>$title</title>
 
-function getIPAddress() {  
-    //whether ip is from the share internet  
-     if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
-                $ip = $_SERVER['HTTP_CLIENT_IP'];  
-        }  
-    //whether ip is from the proxy  
-    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
-                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
-     }  
-//whether ip is from the remote address  
-    else{  
-             $ip = $_SERVER['REMOTE_ADDR'];  
-     }  
-     return $ip;  
-}  
+        <!-- Favicons -->
+        <link href="images/7660092.jpg" rel="icon">
+        <link href="images/7660092.jpg" rel="apple-touch-icon">
+
+        <!-- bootstrap CSS link -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <!--font awesome link-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!--css file-->
+        <link rel="stylesheet" href="style.css" type="text/css">
+        </head>
+    <body class="font-monospace">
+            
+EOT;
+}
+
+// Template footer
+function template_footer() {
+    $year = date('Y');
+    echo <<<EOT
+            <footer>
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                  <p>&copy; $year, Pudfra-Shop</p>
+                </div>
+                <!-- Copyright -->
+            </footer>
+        <!--bootstrap Js link -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        </body>
+        </html>
+    EOT;
+    }
 ?>
