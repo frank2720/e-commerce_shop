@@ -2,7 +2,7 @@
 include_once 'functions/common.php';
 ?>
 
-<?=template_header('Home')?>
+<?=template_header('Pudfra-Shop')?>
         <header>
             <div class="p-3 text-center bg-white border-bottom">
                 <div class="container">
