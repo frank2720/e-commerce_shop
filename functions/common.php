@@ -4,15 +4,25 @@ include_once './database/connection.php';
 //function of getting products to index.php
 function getproducts(){
     global $conn;
+    // The amounts of products to show on each page
+    $num_products_on_each_page = 8;
+    // The current page - in the URL, will appear as index.php?page=products&p=1, index.php?page=products&p=2, etc...
+    $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
+
     if (!isset($_GET['category_id'])) {
     
-    $select_products=$conn->prepare("SELECT * FROM products ORDER BY RAND() LIMIT 12");
-    //execute query
+    $select_products=$conn->prepare("SELECT * FROM products ORDER BY time_added DESC LIMIT ?,?");
+    
+    // bindValue will allow us to use an integer in the SQL statement, which we need to use for the LIMIT clause
+    $select_products->bindValue(1, ($current_page - 1) * $num_products_on_each_page, PDO::PARAM_INT);
+    $select_products->bindValue(2, $num_products_on_each_page, PDO::PARAM_INT);
     $select_products->execute();
     
-    $r=$select_products->setFetchMode(PDO::FETCH_ASSOC);
-    $result=$select_products->fetchAll();
+    // Fetch the products from the database and return the result as an Array
+    $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
+
     
+
     foreach ($result as $column){
         //displaying text with more than 50 characters
         $text = $column['product_description'];
@@ -34,6 +44,16 @@ function getproducts(){
         </div>
         </div>
         </div>";
+    }
+
+    // Get the total number of products
+    $total_products = $conn->query('SELECT * FROM products')->rowCount();
+
+    if ($current_page>1) {
+        echo "<a href='main.php?page=products&p=".($current_page-1)."'>&laquo; Prev</a>";
+    }
+    if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
+        echo "<a href='main.php?page=products&p=".($current_page+1)."'>Next &raquo;</a>";
     }
 }
 }
