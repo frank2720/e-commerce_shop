@@ -20,47 +20,21 @@ include_once 'functions/common.php';
         <link rel="stylesheet" href="style.css">
     </head>
 <body class="font-monospace">
-        <!-- Navbar -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
-    <!-- Container wrapper -->
-    <div class="container">
-        <!-- Toggle button -->
-        <button 
-            class="navbar-toggler" 
-            type="button" 
-            data-mdb-toggle="collapse" 
-            data-mdb-target="#navbarSupportedContent1" 
-            aria-controls="navbarSupportedContent1" 
-            aria-expanded="false" 
-            aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
-
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent1">
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href=""></a>
-                </li>
-            </ul>
-            <!-- Left links -->
-        </div>
-        <!-- Collapsible wrapper -->
-
-        <!-- Right elements -->
-        <div class="d-flex align-items-center">
-            <!-- Icon -->
-            <a class="nav-link me-3" href="#">
+    
+<header>
+    <div class="content-wrapper">
+        <h1>Shopping Cart System</h1>
+        <nav>
+            <a href="main.php">Home</a>
+            <a href="main.php?page=products">Products</a>
+        </nav>
+        <div class="link-icons">
+            <a href="main.php?page=cart">
                 <i class="fas fa-shopping-cart"></i>
-                <span class="badge rounded-pill badge-notification bg-danger">1</span>
             </a>
         </div>
-        <!-- Right elements -->
     </div>
-    <!-- Container wrapper -->
-</nav>
-<!-- Navbar -->
+</header>
 
 <!--Main layout-->
 <main class="mt-5 pt-4">
@@ -144,41 +118,4 @@ include_once 'functions/common.php';
 </main>
 <!--Main layout-->
 
-<!-- footer -->
-<footer class="text-center text-white mt-4" style="background-color: #607d8b;">
-
-    <hr class="text-dark" />
-
-    <div class="container">
-        <!-- Section: Social media -->
-        <section class="mb-3">
-            <!-- Facebook -->
-            <a class="btn-link btn-floating btn-lg text-white" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
-
-            <!-- Twitter -->
-            <a class="btn-link btn-floating btn-lg text-white" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
-
-            <!-- Google -->
-            <a class="btn-link btn-floating btn-lg text-white" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
-
-            <!-- Instagram -->
-            <a class="btn-link btn-floating btn-lg text-white" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
-
-            <!-- YouTube -->
-            <a class="btn-link btn-floating btn-lg text-white" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-youtube"></i></a>
-            <!-- Github -->
-            <a class="btn-link btn-floating btn-lg text-white" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
-        </section>
-        <!-- Section: Social media -->
-    </div>
-    <!-- Grid container -->
-
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); text-color: #e0e0e0;">
-        © 2022 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-    </div>
-    <!-- Copyright -->
-</footer>
-
-</body>
+<?=template_footer()?>
