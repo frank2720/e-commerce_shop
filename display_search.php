@@ -1,25 +1,8 @@
 <?php
 include_once 'functions/common.php';
 ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta nname="viewport" content="width=device-width, initial-scale=1">
-        <title>Pudfra-Shop</title>
 
-        <!-- Favicons -->
-        <link href="images/7660092.jpg" rel="icon">
-        <link href="images/7660092.jpg" rel="apple-touch-icon">
-
-        <!-- bootstrap CSS link -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-        <!--font awesome link-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!--css file-->
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body class="font-monospace">
+<?=template_header('Pudfra-Shop')?>
         <header>
             <div class="p-3 text-center bg-white border-bottom">
                 <div class="container">
@@ -114,11 +97,4 @@ include_once 'functions/common.php';
             </div>
         </section>
         
-        <!-- Products -->
-<?php
-include_once 'common_parts/footer.php'
-?>
-<!--bootstrap Js link -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-</body>
-</html>
+<?=template_footer()?>

@@ -1,5 +1,22 @@
 <?php
+include_once 'database/connection.php';
 include_once 'functions/common.php';
+if (isset($_GET['product_id'])) {
+    // Prepare statement and execute, prevents SQL injection
+    $stmt = $conn->prepare('SELECT * FROM products WHERE product_id = ?');
+    $stmt->execute([$_GET['product_id']]);
+    // Fetch the product from the database and return the result as an Array
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    // Check if the product exists (array is not empty)
+    if (!$product) {
+        // Simple error to display if the id for the product doesn't exists (array is empty)
+        exit('Product does not exist!');
+    }
+} else {
+    // Simple error to display if the id wasn't specified
+    exit('Product does not exist!');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,7 +40,7 @@ include_once 'functions/common.php';
     
 <header>
     <div class="content-wrapper">
-        <h1>Shopping Cart System</h1>
+        <h1>Pudfra-Shop</h1>
         <nav>
             <a href="main.php">Home</a>
             <a href="main.php?page=products">Products</a>
@@ -36,86 +53,27 @@ include_once 'functions/common.php';
     </div>
 </header>
 
-<!--Main layout-->
-<main class="mt-5 pt-4">
-    <div class="container mt-5">
-        <!--Grid row-->
-        <div class="row">
-            <!--Grid column-->
-            <div class="col-md-6 mb-4">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid" alt="" />
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-md-6 mb-4">
-                <!--Content-->
-                <div class="p-4">
-                    <p class="lead">
-                        <span class="me-1">
-                            <del>Ksh 200</del>
-                        </span>
-                        <span>Ksh 100</span>
-                    </p>
-
-                    <strong><p style="font-size: 20px;">Description</p></strong>
-
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa sint voluptatibus! Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.</p>
-
-                    <form class="d-flex justify-content-left">
-                        <!-- Default input -->
-                        <div class="form-outline me-1" style="width: 100px;">
-                            <input type="number" value="1" class="form-control" />
-                        </div>
-                        <button class="btn btn-primary ms-1" type="submit">
-                            Add to cart
-                            <i class="fas fa-shopping-cart ms-1"></i>
-                        </button>
-                    </form>
-                </div>
-                <!--Content-->
-            </div>
-            <!--Grid column-->
+<main>
+<div class="product content-wrapper">
+    <img src="admin_page/actions/<?=$product['product_image']?>" width="500" height="500" alt="<?=$product['product_name']?>">
+    <div>
+        <h1 class="name"><?=$product['product_name']?></h1>
+        <span class="price">
+            &dollar;<?=$product['price']?>
+            <?php if ($product['rrp'] > 0): ?>
+            <span class="rrp">&dollar;<?=$product['rrp']?></span>
+            <?php endif; ?>
+        </span>
+        <form action="main.php?page=cart" method="post">
+            <input type="number" name="quantity" value="1" min="1" max="<?=$product['quantity']?>" placeholder="Quantity" required>
+            <input type="hidden" name="product_id" value="<?=$product['product_id']?>">
+            <input type="submit" value="Add To Cart">
+        </form>
+        <div class="description">
+            <?=$product['product_description']?>
         </div>
-        <!--Grid row-->
-
-        <hr />
-
-        <!--Grid row-->
-        <div class="row d-flex justify-content-center">
-            <!--Grid column-->
-            <div class="col-md-6 text-center">
-                <h4 class="my-4 h4">Additional information</h4>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit voluptates, quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
-            </div>
-            <!--Grid column-->
-        </div>
-        <!--Grid row-->
-
-        <!--Grid row-->
-        <div class="row">
-            <!--Grid column-->
-            <div class="col-lg-4 col-md-12 mb-4">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="" />
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="" />
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="" />
-            </div>
-            <!--Grid column-->
-        </div>
-        <!--Grid row-->
     </div>
-</main>
+</div>
 <!--Main layout-->
-
+</main>
 <?=template_footer()?>

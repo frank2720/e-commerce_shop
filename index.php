@@ -97,5 +97,4 @@ include_once 'functions/common.php';
             </div>
         </section>
         
-        <!-- Products -->
 <?=template_footer()?>
