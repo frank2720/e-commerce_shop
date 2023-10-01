@@ -27,7 +27,7 @@ if (isset($_GET['product_id'])) {
 
 <main>
     <div class="product content-wrapper">
-    <img src="admin_page/actions/<?=$product['product_image']?>" width="500" height="500" alt="<?=$product['product_name']?>">
+    <img src="admin_page/actions/<?=$product['product_image']?>" width="60%" height="500" alt="<?=$product['product_name']?>">
     <div>
         <h1 class="name"><?=$product['product_name']?></h1>
         <span class="price">

@@ -1,5 +1,10 @@
 <?php
 include_once 'functions/common.php';
+include_once 'database/connection.php';
+// Get the 4 most recently added products
+$stmt = $conn->prepare('SELECT * FROM products ORDER BY time_added DESC LIMIT 4');
+$stmt->execute();
+$recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <?=template_header('Pudfra-Shop')?>
@@ -13,15 +18,15 @@ include_once 'functions/common.php';
                         <button type="submit" name="search_data_product"><i class="fa fa-search"></i></button>
                     </form>
                     </div>
-                    <a href="" class="link-icons py-1 px-3 nav-link d-flex align-items-center">
-                        <i class="fas fa-heart m-1 me-md-2"></i>
+                    <a href="">
+                        <i class="fas fa-heart"></i>
                     </a>
                     <a href="main.php?page=cart">
                         <i class="fas fa-shopping-cart"></i><span><?=$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;?></span>
                     </a>
                 </div>
             </div>
-            
+        </header>
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f5f5f5;">
             <!-- Container wrapper -->
@@ -42,13 +47,16 @@ include_once 'functions/common.php';
                 <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link text-dark" aria-current="page" href="main.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="#">Hot offers</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="#">Gift boxes</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link text-dark" href="main.php?page=products">Products</a>
                     </li>
                     <!-- Navbar dropdown -->
                     <li class="nav-item dropdown">
@@ -68,21 +76,27 @@ include_once 'functions/common.php';
             </div>
             <!-- Container wrapper -->
         </nav>
-        </header>
         <!-- Products -->
-        <section>
-            <div class="container my-5">
-                <header class="mb-4">
-                    <p class='h5 text-primary'>Products</p>
-                </header>
-
-                <div class="row">
-                    <?php
-                    getproducts();
-                    category_products(); 
-                    ?>
-                </div>
+        <main>
+        <div class="featured">
+        </div>
+        <div class="recentlyadded content-wrapper">
+            <h2>Recently Added Products</h2>
+            <div class="products">
+                <?php foreach ($recently_added_products as $product): ?>
+                    <a href="main.php?page=product_details&product_id=<?=$product['product_id']?>" class="product">
+                    <img src="admin_page/actions/<?=$product['product_image']?>" width="95%" height="200" alt="<?=$product['product_name']?>">
+                    <span class="name"><?=$product['product_name']?></span>
+                    <span class="price">
+                        Ksh <?=number_format($product['price'])?>
+                        <?php if ($product['rrp'] > 0): ?>
+                            <span class="rrp">Ksh <?=number_format($product['rrp'])?></span>
+                            <?php endif; ?>
+                        </span>
+                    </a>
+                <?php endforeach; ?>
             </div>
-        </section>
+        </div>
+        </main>
         
 <?=template_footer()?>

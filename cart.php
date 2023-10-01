@@ -53,7 +53,7 @@ if (isset($_POST['update']) && isset($_SESSION['cart'])) {
         }
     }
     // Prevent form resubmission...
-    header('location: index.php?page=cart');
+    header('location: main.php?page=cart');
     exit;
 }
 
@@ -116,11 +116,11 @@ if ($products_in_cart) {
                         <br>
                         <a href="main.php?page=cart&remove=<?=$product['product_id']?>" class="remove">Remove</a>
                     </td>
-                    <td class="price">Ksh <?=$product['price']?></td>
+                    <td class="price"><?=number_format($product['price'])?></td>
                     <td class="quantity">
                         <input type="number" name="quantity-<?=$product['product_id']?>" value="<?=$products_in_cart[$product['product_id']]?>" min="1" max="<?=$product['quantity']?>" placeholder="Quantity" required>
                     </td>
-                    <td class="price">Ksh <?=$product['price'] * $products_in_cart[$product['product_id']]?></td>
+                    <td class="price">Ksh <?=number_format($product['price'] * $products_in_cart[$product['product_id']])?></td>
                 </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>
@@ -128,7 +128,7 @@ if ($products_in_cart) {
         </table>
         <div class="subtotal">
             <span class="text">Subtotal</span>
-            <span class="price">Ksh <?=$subtotal?></span>
+            <span class="price">Ksh <?=number_format($subtotal)?></span>
         </div>
         <div class="buttons">
             <input type="submit" value="Update" name="update">

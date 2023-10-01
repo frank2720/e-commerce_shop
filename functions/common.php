@@ -40,7 +40,7 @@ function getproducts(){
         <p class='card-text'>".$text."</p>
         <p class='card-title'><b>Ksh ".number_format($column['price'])."</b></p>
         <a href='#' class='btn btn-primary'>Add to cart</a>
-        <a href='product_details.php?product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
+        <a href='main.php?product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
         </div>
         </div>
         </div>";
@@ -93,7 +93,7 @@ function search_products(){
         <p class='card-text'>".$text."</p>
         <p class='card-title'><b>Ksh ".number_format($column['price'])."</b></p>
         <a href='#' class='btn btn-primary'>Add to cart</a>
-        <a href='product_details.php?product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
+        <a href='main.php?page=product_details&product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
         </div>
         </div>
         </div>";
@@ -133,7 +133,7 @@ function category_products(){
         <p class='card-text'>".$text."</p>
         <p class='card-title'><b>Ksh ".number_format($column['price'])."</b></p>
         <a href='#' class='btn btn-primary'>Add to cart</a>
-        <a href='product_details.php?product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
+        <a href='main.php?product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
         </div>
         </div>
         </div>";

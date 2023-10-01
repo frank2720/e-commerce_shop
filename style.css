@@ -104,9 +104,10 @@
   main .featured {
     display: flex;
     flex-direction: column;
+    background-image: url(imgs/pexels-nataliya-vaitkevich-6214388.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 500px;
+    height: 600px;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -117,7 +118,7 @@
     width: 1050px;
     font-family: Rockwell, Courier Bold, Courier, Georgia, Times, Times New Roman, serif;
     font-size: 68px;
-    color: #FFFFFF;
+    color: #361111;
     padding-bottom: 10px;
   }
   main .featured p {
@@ -125,7 +126,7 @@
     margin: 0;
     width: 1050px;
     font-size: 24px;
-    color: #FFFFFF;
+    color: #361111;
   }
   main .recentlyadded h2 {
     display: block;
@@ -282,7 +283,7 @@
     text-align: right;
   }
   main .cart table .img {
-    width: 100%;
+    width: 80px;
   }
   main .cart table .remove {
     color: #777777;
