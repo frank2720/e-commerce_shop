@@ -4,36 +4,24 @@ include_once 'functions/common.php';
 
 <?=template_header('Pudfra-Shop')?>
         <header>
-            <div class="p-3 text-center bg-white border-bottom">
-                <div class="container">
-                    <div class="row gy-3">
-                        <!--Left elements-->
-                         <div class="col-lg-2 col-sm-4 col-4">
-                            <a href="index.php" class="float-start">
-                                <img src="images/7660092.jpg" height="60" />
-                            </a>
-                        </div>
-                        <!--center elements-->
-                        <div class="order-lg-last col-lg-5 col-sm-8 col-8">
-                            <div class="d-flex float-end">
-                                <a href="user/login.php" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="fas fa-user-alt m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Sign in</p> </a>
-                                <a href="" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="fas fa-heart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Wishlist</p> </a>
-                                <a href="" class="border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="fas fa-shopping-cart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">My cart</p> </a>
-                            </div>
-                        </div>
-                        <!-- Right elements -->
-                        <div class="col-lg-5 col-md-12 col-12">
-                            <form action="" method="get">
-                                <div class="input-group float-center">
-                                    <input type="search" class="form-control" placeholder="Search" name="search_product" />
-                                    <button type="submit" class="btn btn-primary shadow-0 icon-hover" :hover value="search" name="search_data_product"><i class="fas fa-search"></i></button>
-                                </div>
-                            </form>
-                        </div>
-
+           <div class="content-wrapper">
+                <h1>Pudfra-Shop</h1>
+                <div class="link-icons">
+                    <div class="input-group-text border-0">
+                    <form action="display_search.php" method="get">
+                        <input type="search" placeholder="search product" name="search_product" />
+                        <button type="submit" name="search_data_product"><i class="fa fa-search"></i></button>
+                    </form>
                     </div>
+                    <a href="" class="link-icons py-1 px-3 nav-link d-flex align-items-center">
+                        <i class="fas fa-heart m-1 me-md-2"></i>
+                    </a>
+                    <a href="main.php?page=cart">
+                        <i class="fas fa-shopping-cart"></i><span><?=$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;?></span>
+                    </a>
                 </div>
             </div>
+
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f5f5f5;">
             <!-- Container wrapper -->
