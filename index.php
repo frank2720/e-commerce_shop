@@ -79,6 +79,8 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <!-- Products -->
         <main>
         <div class="featured">
+            <h2>Gadgets</h2>
+            <p>Essential gadgets for everyday use</p>
         </div>
         <div class="recentlyadded content-wrapper">
             <h2>Recently Added Products</h2>
