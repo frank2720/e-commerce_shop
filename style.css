@@ -118,7 +118,7 @@
     width: 1050px;
     font-family: Rockwell, Courier Bold, Courier, Georgia, Times, Times New Roman, serif;
     font-size: 68px;
-    color: #361111;
+    color: #FFFFFF;
     padding-bottom: 10px;
   }
   main .featured p {
@@ -126,7 +126,7 @@
     margin: 0;
     width: 1050px;
     font-size: 24px;
-    color: #361111;
+    color: #FFFFFF;
   }
   main .recentlyadded h2 {
     display: block;
