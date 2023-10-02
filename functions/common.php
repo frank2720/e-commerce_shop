@@ -6,7 +6,7 @@ function getproducts(){
     global $conn;
     // The amounts of products to show on each page
     $num_products_on_each_page = 8;
-    // The current page - in the URL, will appear as index.php?page=products&p=1, index.php?page=products&p=2, etc...
+    // The current page - in the URL, will appear as main.php?page=products&p=1, main.php?page=products&p=2, etc...
     $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
 
     if (!isset($_GET['category_id'])) {
@@ -26,24 +26,22 @@ function getproducts(){
     foreach ($result as $column){
         //displaying text with more than 50 characters
         $text = $column['product_description'];
-        $maxPos = 50;
+        $maxPos = 25;
         if (strlen($text) > $maxPos)
         {
             $lastPos = ($maxPos - 3) - strlen($text);
             $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
         }
-        echo "<div class='col-lg-3 col-md-6 col-sm-6 mb-2'>
-        <div class='card h-100'>
-        <img src='admin_page/actions/".$column['product_image']."' class='card-img-top' alt='".$column['product_name']." image'>
-        <div class='card-body'>
-        <a href='#!' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
-        <p class='card-text'>".$text."</p>
-        <p class='card-title'><b>Ksh ".number_format($column['price'])."</b></p>
-        <a href='#' class='btn btn-primary'>Add to cart</a>
-        <a href='main.php?product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
-        </div>
-        </div>
-        </div>";
+        echo "<a href='main.php?page=product_details&product_id=".$column['product_id']."' class='product'>
+        <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
+        <p>".$text."</p>
+        <span class='price'>Ksh ".number_format($column['price'])."
+        ";
+        if ($column['rrp']>0) {
+            echo "<span class='rrp'>Ksh ".number_format($column['rrp'])."</span>";
+        }
+        echo "</span>
+        </a>";
     }
 
     // Get the total number of products

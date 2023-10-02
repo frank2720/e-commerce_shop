@@ -25,8 +25,22 @@ if ($products_in_cart) {
 
 <?=template_header('Cart')?>
 
+<header>
+    <div class="content-wrapper">
+        <h1>Pudfra-Shop</h1>
+        <nav>
+            <a href="main.php">Home</a>
+            <a href="main.php?page=products">Products</a>
+        </nav>
+        <div class="link-icons">
+            <a href="main.php?page=cart">
+                <i class="fas fa-shopping-cart"></i><span><?=$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;?></span>
+            </a>
+        </div>
+    </div>
+</header>
+<main>
 <div class="cart content-wrapper">
-    <h1>Pudfra-shop</h1>
     <form action="main.php?page=cart" method="post">
         <table>
             <thead>
@@ -46,7 +60,7 @@ if ($products_in_cart) {
                 <?php foreach ($products as $product): ?>
                 <tr>
                     <td class="img">
-                        <a href="main.php?page=product&product_id=<?=$product['product_id']?>">
+                        <a href="main.php?page=product_details&product_id=<?=$product['product_id']?>">
                             <img src="admin_page/actions/<?=$product['product_image']?>" width="50" height="50" alt="<?=$product['product_name']?>">
                         </a>
                     </td>
@@ -55,7 +69,7 @@ if ($products_in_cart) {
                         <br>
                         <a href="main.php?page=cart&remove=<?=$product['product_id']?>" class="remove">Remove</a>
                     </td>
-                    <td class="price"><?=number_format($product['price'])?></td>
+                    <td class="price">Ksh <?=number_format($product['price'])?></td>
                     <td class="quantity">
                         <input type="number" name="quantity-<?=$product['product_id']?>" value="<?=$products_in_cart[$product['product_id']]?>" min="1" max="<?=$product['quantity']?>" placeholder="Quantity" required>
                     </td>
@@ -75,5 +89,6 @@ if ($products_in_cart) {
         </div>
     </form>
 </div>
+</main>
 
 <?=template_footer()?>
