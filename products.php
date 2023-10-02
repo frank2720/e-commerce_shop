@@ -69,12 +69,13 @@ include_once 'functions/common.php';
             </div>
             <!-- Container wrapper -->
         </nav>
-        
+
 <main>
 <div class="products content-wrapper">
     <h1>Products</h1>
     <div class='products-wrapper'>
         <?=getproducts()?>
+        <?=category_products()?>
     </div>
 </div>
 </main>
