@@ -139,7 +139,8 @@ function search_products(){
     $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
 
     if(count($result)==0){
-        echo "<h1'>Product not available</h1>";
+        echo "<h1>Product not available</h1>";
+        exit;
     }
     
     foreach ($result as $column){

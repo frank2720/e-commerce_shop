@@ -2,7 +2,8 @@
 include_once 'functions/common.php';
 ?>
 
-<?=template_header('Pudfra-Shop')?>
+<?=template_header('Products')?>
+
 <header>
     <div class="content-wrapper">
         <h1>Pudfra-Shop</h1>
@@ -12,7 +13,7 @@ include_once 'functions/common.php';
         </nav>
         <div class="link-icons">
             <div class="input-group-text border-0">
-                <form action="" method="get">
+                <form action="display_search.php" method="get">
                     <input type="search" placeholder="search product" name="search_product" />
                     <input type="submit" name="search_data_product" value="search"/>
                 </form>
@@ -23,7 +24,6 @@ include_once 'functions/common.php';
         </div>
     </div>
 </header>
-
 <main>
 <div class="products content-wrapper">
     <h1>Products</h1>
@@ -35,5 +35,4 @@ include_once 'functions/common.php';
     </div>
 </div>
 </main>
-        
 <?=template_footer()?>
