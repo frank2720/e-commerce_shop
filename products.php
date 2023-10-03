@@ -13,9 +13,9 @@ include_once 'functions/common.php';
         </nav>
         <div class="link-icons">
             <div class="input-group-text border-0">
-                <form action="main.php" method="get">
+                <form action="display_search.php" method="get">
                     <input type="search" placeholder="search product" name="search_product" />
-                    <button type="submit" name="search_data_product"><i class="fa fa-search"></i></button>
+                    <input type="submit" name="search_data_product" value="search"/>
                 </form>
             </div>
             <a href="main.php?page=cart">
