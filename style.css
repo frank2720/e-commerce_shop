@@ -356,3 +356,11 @@
     padding: 20px 0;
     width: 100%;
   }
+
+  .image-container {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

@@ -34,14 +34,13 @@ function getproducts(){
         }
         echo "<a href='main.php?page=product_details&product_id=".$column['product_id']."' class='product'>
         <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
-        <p>".$column['product_name']."</p>
+        <span class='name'>".$column['product_name']."</span>
         <span class='price'>Ksh ".number_format($column['price'])."
         ";
         if ($column['rrp']>0) {
             echo "<span class='rrp'>Ksh ".number_format($column['rrp'])."</span>";
         }
-        echo "</span>
-        </a>";
+        echo "</span></a>";
     }
 
     // Get the total number of products
@@ -154,7 +153,7 @@ function search_products(){
         }
         echo "<a href='main.php?page=product_details&product_id=".$column['product_id']."' class='product'>
         <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
-        <p>".$column['product_name']."</p>
+        <span class='name'>".$column['product_name']."</span>
         <span class='price'>Ksh ".number_format($column['price'])."
         ";
         if ($column['rrp']>0) {
@@ -228,7 +227,7 @@ function template_footer() {
     echo <<<EOT
             <footer>
                 <!-- Copyright -->
-                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                <div class="text-center content-wrapper">
                   <p>&copy; $year, Pudfra-Shop</p>
                 </div>
                 <!-- Copyright -->
