@@ -83,7 +83,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($recently_added_products as $product): ?>
                     <a href="main.php?page=product_details&product_id=<?=$product['product_id']?>" class="product">
                     <img src="admin_page/actions/<?=$product['product_image']?>" width="95%" height="200" alt="<?=$product['product_name']?>">
-                    <span class="name"><?=$product['product_name']?></span>
+                    <p><?=$product['product_name']?></p>
                     <span class="price">
                         Ksh <?=number_format($product['price'])?>
                         <?php if ($product['rrp'] > 0): ?>
