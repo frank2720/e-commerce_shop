@@ -122,43 +122,58 @@ function  category_products(){
 # search products
 function search_products(){
     global $conn;
+    // The amounts of products to show on each page
+    $num_products_on_each_page = 8;
+    // The current page - in the URL, will appear as main.php?page=products&p=1, main.php?page=products&p=2, etc...
+    $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
+
     if (isset($_GET['search_data_product'])) {
         $product_value=$_GET['search_product'];
     
-    $select_products=$conn->prepare("SELECT * FROM products WHERE keywords LIKE '%$product_value%' ORDER BY RAND()");
-    //execute query
+    $select_products=$conn->prepare("SELECT * FROM products WHERE keywords LIKE '%$product_value%' LIMIT ?,?");
+    // bindValue will allow us to use an integer in the SQL statement, which we need to use for the LIMIT clause
+    $select_products->bindValue(1, ($current_page - 1) * $num_products_on_each_page, PDO::PARAM_INT);
+    $select_products->bindValue(2, $num_products_on_each_page, PDO::PARAM_INT);
     $select_products->execute();
+    
+    // Fetch the products from the database and return the result as an Array
+    $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
 
-    $count=$select_products->rowCount();
-
-    if($count==0){
-        echo "<small class='text-center text-danger h5'>Product not available</small>";
+    if(count($result)==0){
+        echo "<h1'>Product not available</h1>";
     }
-    $r=$select_products->setFetchMode(PDO::FETCH_ASSOC);
-    $result=$select_products->fetchAll();
     
     foreach ($result as $column){
         //displaying text with more than 50 characters
         $text = $column['product_description'];
-        $maxPos = 50;
+        $maxPos = 25;
         if (strlen($text) > $maxPos)
         {
             $lastPos = ($maxPos - 3) - strlen($text);
             $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
         }
-        echo "<div class='col-lg-3 col-md-6 col-sm-6 mb-2'>
-        <div class='card h-100'>
-        <img src='admin_page/actions/".$column['product_image']."' class='card-img-top' alt='".$column['product_name']." image'>
-        <div class='card-body'>
-        <a href='#!' class='btn btn-light border px-2 pt-2 float-end icon-hover'><i class='fas fa-heart fa-lg px-1 text-secondary'></i></a>
-        <p class='card-text'>".$text."</p>
-        <p class='card-title'><b>Ksh ".number_format($column['price'])."</b></p>
-        <a href='#' class='btn btn-primary'>Add to cart</a>
-        <a href='main.php?page=product_details&product_id=".$column['product_id']."' class='btn btn-secondary'>View more</a>
-        </div>
-        </div>
-        </div>";
+        echo "<a href='main.php?page=product_details&product_id=".$column['product_id']."' class='product'>
+        <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
+        <p>".$column['product_name']."</p>
+        <span class='price'>Ksh ".number_format($column['price'])."
+        ";
+        if ($column['rrp']>0) {
+            echo "<span class='rrp'>Ksh ".number_format($column['rrp'])."</span>";
+        }
+        echo "</span>
+        </a>";
     }
+     // Get the total number of products
+     $total_products = $conn->query('SELECT * FROM products')->rowCount();
+
+     echo "<div class='buttons'>";
+     if ($current_page>1) {
+         echo "<a href='main.php?page=products&p=".($current_page-1)."'>&laquo; Prev</a>";
+     }
+     if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
+         echo "<a href='main.php?page=products&p=".($current_page+1)."'>Next &raquo;</a>";
+     }
+     echo "</div>";
 }
 }
 
@@ -171,7 +186,7 @@ function getcategories(){
     //execute query
     $select_category->execute();
     
-    $r=$select_category->setFetchMode(PDO::FETCH_ASSOC);
+    $select_category->setFetchMode(PDO::FETCH_ASSOC);
     $result=$select_category->fetchAll();
     
     foreach ($result as $column) {

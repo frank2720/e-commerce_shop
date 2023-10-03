@@ -21,7 +21,7 @@ include_once 'functions/common.php';
                     </a>
                 </div>
             </div>
-
+        </header>
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f5f5f5;">
             <!-- Container wrapper -->
@@ -68,21 +68,19 @@ include_once 'functions/common.php';
             </div>
             <!-- Container wrapper -->
         </nav>
-        </header>
         <!-- Products -->
-        <section>
-            <div class="container my-5">
-                <header class="mb-4">
-                    <p class='h5 text-primary'>Products</p>
-                </header>
-
+        <main>
+            <div class="products content-wrapper">
+                <h1>Products</h1>
                 <div class="row">
+                <div class='products-wrapper'>
                     <?php
                     search_products();
                     category_products();
                     ?>
                 </div>
+                </div>
             </div>
-        </section>
+        </main>
         
 <?=template_footer()?>
