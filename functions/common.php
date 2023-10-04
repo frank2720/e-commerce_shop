@@ -57,66 +57,6 @@ function getproducts(){
 }
 }
 
-//getting products from specific categories
-function  category_products(){
-    global $conn;
-    // The amounts of products to show on each page
-    $num_products_on_each_page = 8;
-    // The current page - in the URL, will appear as main.php?page=products&p=1, main.php?page=products&p=2, etc...
-    $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
-
-    if (isset($_GET['category_id'])) {
-
-    $category_id=$_GET['category_id'];
-    
-    $select_products=$conn->prepare("SELECT * FROM products WHERE category_id=$category_id LIMIT ?,?");
-    
-    // bindValue will allow us to use an integer in the SQL statement, which we need to use for the LIMIT clause
-    $select_products->bindValue(1, ($current_page - 1) * $num_products_on_each_page, PDO::PARAM_INT);
-    $select_products->bindValue(2, $num_products_on_each_page, PDO::PARAM_INT);
-    $select_products->execute();
-    
-    // Fetch the products from the database and return the result as an Array
-    $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
-
-    if (count($result)==0) {
-        echo "<h1>No products in stock for this category</h1>";
-    }
-
-    foreach ($result as $column){
-        //displaying text with more than 25 characters
-        $text = $column['product_description'];
-        $maxPos = 25;
-        if (strlen($text) > $maxPos)
-        {
-            $lastPos = ($maxPos - 3) - strlen($text);
-            $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
-        }
-        echo "<a href='main.php?page=product_details&product_id=".$column['product_id']."' class='product'>
-        <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
-        <p>".$text."</p>
-        <span class='price'>Ksh ".number_format($column['price'])."
-        ";
-        if ($column['rrp']>0) {
-            echo "<span class='rrp'>Ksh ".number_format($column['rrp'])."</span>";
-        }
-        echo "</span></a>";
-    }
-
-    // Get the total number of products
-    $total_products = $conn->query('SELECT * FROM products')->rowCount();
-
-    echo "<div class='buttons'>";
-    if ($current_page>1) {
-        echo "<a href='main.php?page=products&p=".($current_page-1)."'>&laquo; Prev</a>";
-    }
-    if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
-        echo "<a href='main.php?page=products&p=".($current_page+1)."'>Next &raquo;</a>";
-    }
-    echo "</div>";
-}
-}
-
 
 # search products
 function search_products(){
@@ -177,6 +117,66 @@ function search_products(){
 }
 }
 
+
+//getting products from specific categories
+function  category_products(){
+    global $conn;
+    // The amounts of products to show on each page
+    $num_products_on_each_page = 8;
+    // The current page - in the URL, will appear as main.php?page=products&p=1, main.php?page=products&p=2, etc...
+    $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
+
+    if (isset($_GET['category_id'])) {
+
+    $category_id=$_GET['category_id'];
+    
+    $select_products=$conn->prepare("SELECT * FROM products WHERE category_id=$category_id LIMIT ?,?");
+    
+    // bindValue will allow us to use an integer in the SQL statement, which we need to use for the LIMIT clause
+    $select_products->bindValue(1, ($current_page - 1) * $num_products_on_each_page, PDO::PARAM_INT);
+    $select_products->bindValue(2, $num_products_on_each_page, PDO::PARAM_INT);
+    $select_products->execute();
+    
+    // Fetch the products from the database and return the result as an Array
+    $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($result)==0) {
+        echo "<h1>No products in stock for this category</h1>";
+    }
+
+    foreach ($result as $column){
+        //displaying text with more than 25 characters
+        $text = $column['product_description'];
+        $maxPos = 25;
+        if (strlen($text) > $maxPos)
+        {
+            $lastPos = ($maxPos - 3) - strlen($text);
+            $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
+        }
+        echo "<a href='main.php?page=product_details&product_id=".$column['product_id']."' class='product'>
+        <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
+        <p>".$text."</p>
+        <span class='price'>Ksh ".number_format($column['price'])."
+        ";
+        if ($column['rrp']>0) {
+            echo "<span class='rrp'>Ksh ".number_format($column['rrp'])."</span>";
+        }
+        echo "</span></a>";
+    }
+
+    // Get the total number of products
+    $total_products = $conn->query('SELECT * FROM products')->rowCount();
+
+    echo "<div class='buttons'>";
+    if ($current_page>1) {
+        echo "<a href='main.php?page=products&p=".($current_page-1)."'>&laquo; Prev</a>";
+    }
+    if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
+        echo "<a href='main.php?page=products&p=".($current_page+1)."'>Next &raquo;</a>";
+    }
+    echo "</div>";
+}
+}
 
 //function for getting categories to the dropdown in the index.php file
 
