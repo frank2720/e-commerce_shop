@@ -13,7 +13,7 @@ include_once 'functions/common.php';
 
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categories
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
