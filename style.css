@@ -364,3 +364,13 @@
     align-items: center;
     height: 100vh;
 }
+
+.paginationBttns {
+  position: absolute;
+  bottom: 0px;
+  list-style: none;
+  left: 40%;
+  display: flex;
+  justify-content: center;
+  bottom: 0px;
+}

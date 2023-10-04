@@ -22,7 +22,7 @@ function getproducts(){
     $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
 
     
-
+    echo "<div class='products-wrapper'>";
     foreach ($result as $column){
         //displaying text with more than 50 characters
         $text = $column['product_description'];
@@ -42,6 +42,7 @@ function getproducts(){
         }
         echo "</span></a>";
     }
+    echo "</div>";
 
     // Get the total number of products
     $total_products = $conn->query('SELECT * FROM products')->rowCount();
@@ -82,7 +83,7 @@ function search_products(){
         echo "<h1>Product not available</h1>";
         exit;
     }
-    
+    echo "<div class='products-wrapper'>";
     foreach ($result as $column){
         //displaying text with more than 50 characters
         $text = $column['product_description'];
@@ -103,8 +104,10 @@ function search_products(){
         echo "</span>
         </a>";
     }
+    echo "</div>";
+
      // Get the total number of products
-     $total_products = $conn->query('SELECT * FROM products')->rowCount();
+     $total_products = $conn->query("SELECT * FROM products WHERE keywords LIKE '%$product_value%'")->rowCount();
 
      echo "<div class='buttons'>";
      if ($current_page>1) {

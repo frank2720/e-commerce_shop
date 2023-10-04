@@ -27,12 +27,10 @@ include_once 'functions/common.php';
 <main>
 <div class="products content-wrapper">
     <h1>Products</h1>
-    <div class='products-wrapper'>
-        <?php 
-        search_products();
-        category_products();
-        ?>
-    </div>
+    <?php 
+    search_products();
+    category_products();
+    ?>
 </div>
 </main>
 <?=template_footer()?>
