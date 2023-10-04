@@ -145,8 +145,10 @@ function  category_products(){
 
     if (count($result)==0) {
         echo "<h1>No products in stock for this category</h1>";
+        exit;
     }
 
+    echo "<div class='products-wrapper'>";
     foreach ($result as $column){
         //displaying text with more than 25 characters
         $text = $column['product_description'];
@@ -158,17 +160,19 @@ function  category_products(){
         }
         echo "<a href='main.php?page=product_details&product_id=".$column['product_id']."' class='product'>
         <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
-        <p>".$text."</p>
+        <span class='name'>".$column['product_name']."</span>
         <span class='price'>Ksh ".number_format($column['price'])."
         ";
         if ($column['rrp']>0) {
             echo "<span class='rrp'>Ksh ".number_format($column['rrp'])."</span>";
         }
-        echo "</span></a>";
+        echo "</span>
+        </a>";
     }
+    echo "</div>";
 
     // Get the total number of products
-    $total_products = $conn->query('SELECT * FROM products')->rowCount();
+    $total_products = $conn->query("SELECT * FROM products WHERE category_id=$category_id")->rowCount();
 
     echo "<div class='buttons'>";
     if ($current_page>1) {
