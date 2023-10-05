@@ -27,16 +27,25 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </li>
             </ul>
         </nav>
-        <div class="link-icons">
-            <div class="input-group-text border-0">
-                <form action="display_search.php" method="get">
-                    <input type="search" placeholder="search product" name="search_product" />
-                    <input type="submit" name="search_data_product" value="search"/>
-                </form>
-            </div>
+        
+        <div class="input-group-text border-0">
+            <form action="display_search.php" method="get">
+                <input type="search" placeholder="search product" name="search_product" />
+                <input type="submit" name="search_data_product" value="search"/>
+            </form>
+        </div>
+        
+        <div class ="link-icons">
             <a href="main.php?page=cart">
                 <i class="fas fa-shopping-cart"></i><span><?=$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;?></span>
             </a>
+        </div>
+
+        <div class="link-icons">
+            <a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
+        </div> 
+        <div class="link-icons">
+            <a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </div>
     </div>
 </header>

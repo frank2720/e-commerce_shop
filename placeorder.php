@@ -1,4 +1,8 @@
 <?php
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: userauth/login.html');
+    exit;
+}
 include_once 'functions/common.php';
 ?>
 <?=template_header('Place Order')?>
@@ -13,6 +17,10 @@ include_once 'functions/common.php';
             <a href="main.php?page=cart">
                 <i class="fas fa-shopping-cart"></i><span><?=$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;?></span>
             </a>
+        </div>
+        <div class="link-icons">
+            <a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
+            <a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </div>
     </div>
 </header>
