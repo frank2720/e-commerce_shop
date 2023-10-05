@@ -19,7 +19,7 @@ include_once 'functions/common.php';
             </a>
         </div>
         <div class="link-icons">
-            <a href="profile.php"><i class="fas fa-user-circle"></i><?=$_SESSION['name']?></a>
+            <a href="main.php?page=profile"><i class="fas fa-user-circle"></i><?=$_SESSION['name']?></a>
             <a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </div>
     </div>
