@@ -24,9 +24,22 @@ if (isset($_GET['product_id'])) {
         </div>
 
         <div class="link-icons">
-            <a href="main.php?page=profile"><i class="fas fa-user-circle"></i><?=$_SESSION['name']?></a>
-            <a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            <a href="main.php?page=profile"><i class="fas fa-user-circle"></i>Profile</a>
         </div>
+
+        <?php
+        if (isset($_SESSION['loggedin'])) {
+            echo "<div class='link-icons'>
+            <a href='logout.php'><i class='fas fa-sign-out-alt'></i>Logout</a>
+            </div>
+            ";
+        }else {
+            echo "<div class='link-icons'>
+            <a href='userauth/login.html'><i class='fas fa-sign-out-alt'></i>Login</a>
+            </div>
+            ";
+        }
+        ?> 
     </div>
 </header>
 
