@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email=new_user_input($_POST['email']);
 	$password = new_user_input($_POST["password"]);
     $cpassword = new_user_input($_POST["confirm_password"]);
+    $code = uniqid();
 
     $stmt2 = $conn->prepare("SELECT * FROM accounts WHERE username='$username'");
 	$stmt2->execute();
@@ -36,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if($password==$cpassword){
             $hash = password_hash($password,PASSWORD_DEFAULT);
             #using password hashing
-            $stmt1 = $conn->prepare("INSERT INTO accounts (username,phone,email,password) VALUES ('$username','$phone','$email','$hash')");
+            $stmt1 = $conn->prepare("INSERT INTO accounts (username,phone,email,password) VALUES ('$username','$phone','$email','$hash','$code')");
             if($stmt1->execute()){
                 header('Location: login.html');
             }
