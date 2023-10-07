@@ -30,12 +30,12 @@ if (isset($_GET['product_id'])) {
         <?php
         if (isset($_SESSION['loggedin'])) {
             echo "<div class='link-icons'>
-            <a href='logout.php'><i class='fas fa-sign-out-alt'></i>Logout</a>
+            <a href='logout.php'><i class='fa fa-sign-out'></i>Logout</a>
             </div>
             ";
         }else {
             echo "<div class='link-icons'>
-            <a href='userauth/login.html'><i class='fas fa-sign-out-alt'></i>Login</a>
+            <a href='userauth/login.html'><i class='fa fa-sign-in'></i>Login</a>
             </div>
             ";
         }
