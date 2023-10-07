@@ -27,7 +27,7 @@ $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </a>
         </div>
         <div class="link-icons">
-            <a href="profile.php"><i class="fas fa-user-circle"></i><?=$_SESSION['name']?></a>
+            <a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
             <a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </div>
     </div>
