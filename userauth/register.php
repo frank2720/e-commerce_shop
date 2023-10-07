@@ -37,9 +37,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if($password==$cpassword){
             $hash = password_hash($password,PASSWORD_DEFAULT);
             #using password hashing
-            $stmt1 = $conn->prepare("INSERT INTO accounts (username,phone,email,password) VALUES ('$username','$phone','$email','$hash','$code')");
+            $stmt1 = $conn->prepare("INSERT INTO accounts (username,phone,email,password,activation_code) VALUES ('$username','$phone','$email','$hash','$code')");
             if($stmt1->execute()){
-                header('Location: login.html');
+                $from    = 'noreply@yourdomain.com';
+                $subject = 'Account Activation Required';
+                $headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
+                // Update the activation variable below
+                $activate_link = 'http://yourdomain.com/phplogin/activate.php?email=' . $_POST['email'] . '&code=' . $code;
+                $message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
+                mail($_POST['email'], $subject, $message, $headers);
+                echo 'Please check your email to activate your account!';
             }
         }else{
             echo "<script>alert('password does not match')</script>"; 
