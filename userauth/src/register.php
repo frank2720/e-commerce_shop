@@ -31,7 +31,7 @@ if (is_post_request()) {
 
     if ($errors) {
         redirect_with('register.php', [
-            'inputs' => escape_html($inputs),
+            'inputs' => $inputs,
             'errors' => $errors
         ]);
     }
