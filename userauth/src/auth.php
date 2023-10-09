@@ -1,4 +1,10 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 /**
 * Register a user
 *
@@ -53,18 +59,39 @@ function send_activation_email(string $email, string $activation_code): void
     // create the activation link
     $activation_link = APP_URL . "/activate.php?email=$email&activation_code=$activation_code";
 
-    // set email subject & body
+     // set email subject & body
     $subject = 'Please activate your account';
     $message = <<<MESSAGE
-            Hi,
-            Please click the following link to activate your account:
-            $activation_link
-            MESSAGE;
-    // email header
+             Hi,
+             Please click the following link to activate your account:
+             $activation_link
+             MESSAGE;
+     // email header
     $header = "From:" . SENDER_EMAIL_ADDRESS;
-
-    // send the email
-    mail($email, $subject, nl2br($message), $header);
+ 
+    $mail = new PHPMailer(true);
+    
+    try {
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                                      
+        $mail->isSMTP();                                            
+        $mail->Host       = 'smtp.gmail.com';                    
+        $mail->SMTPAuth   = true;                             
+        $mail->Username   = 'otienof534@gmail.com';                 
+        $mail->Password   = 'ndyo rsxf pzax kgzt';                        
+        $mail->SMTPSecure = 'tls';                              
+        $mail->Port       = 587;  
+ 
+        $mail->setFrom(SENDER_EMAIL_ADDRESS, 'Francis');           
+        $mail->addAddress($email);
+        
+        $mail->isHTML(true);                                  
+        $mail->Subject = $subject;
+        $mail->Body    = $message;
+        $mail->AltBody = nl2br($message);
+        $mail->send();
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
 
 }
 
