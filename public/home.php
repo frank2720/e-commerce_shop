@@ -1,8 +1,8 @@
 <?php
-include_once 'functions/common.php';
-include_once 'database/connection.php';
-// Get the 4 most recently added products
-$stmt = $conn->prepare('SELECT * FROM products ORDER BY time_added DESC LIMIT 4');
+
+require __DIR__ . '/../src/bootstrap.php';
+
+$stmt = db()->prepare('SELECT * FROM products ORDER BY time_added DESC LIMIT 4');
 $stmt->execute();
 $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -13,8 +13,8 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="content-wrapper">
         <h1>Pudfra-Shop</h1>
         <nav>
-            <a href="main.php">Home</a>
-            <a href="main.php?page=products">Products</a>
+            <a href="home.php">Home</a>
+            <a href="home.php?page=products">Products</a>
 
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
@@ -36,13 +36,13 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         
         <div class ="link-icons">
-            <a href="main.php?page=cart">
+            <a href="home.php?page=cart">
                 <i class="fas fa-shopping-cart"></i><span><?=$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;?></span>
             </a>
         </div>
 
         <div class="link-icons">
-            <a href="main.php?page=profile"><i class="fas fa-user-circle"></i>Profile</a>
+            <a href="home.php?page=profile"><i class="fas fa-user-circle"></i>Profile</a>
         </div>
         <?php
         if (isset($_SESSION['loggedin'])) {
@@ -69,7 +69,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <h2>Recently Added Products</h2>
             <div class="products">
                 <?php foreach ($recently_added_products as $product): ?>
-                    <a href="main.php?page=product_details&product_id=<?=$product['product_id']?>" class="product">
+                    <a href="home.php?page=product_details&product_id=<?=$product['product_id']?>" class="product">
                     <img src="admin_page/actions/<?=$product['product_image']?>" width="200" height="200" alt="<?=$product['product_name']?>">
                     <span class="name"><?=$product['product_name']?></span>
                     <span class="price">
