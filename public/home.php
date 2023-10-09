@@ -7,7 +7,7 @@ $stmt->execute();
 $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<?=template_header('Pudfra-Shop')?>
+<?php view('page_header', ['title' => 'Home']) ?>
 
 <header>
     <div class="content-wrapper">
