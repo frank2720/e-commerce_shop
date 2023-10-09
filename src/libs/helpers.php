@@ -105,3 +105,325 @@ function session_flash(...$keys): array
     }
     return $data;
 }
+
+
+include_once './database/connection.php';
+
+//function of getting products to index.php
+function getproducts()
+{
+    global $conn;
+    // The amounts of products to show on each page
+    $num_products_on_each_page = 8;
+    // The current page - in the URL, will appear as main.php?page=products&p=1, main.php?page=products&p=2, etc...
+    $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
+
+    if (!isset($_GET['category_id'])) {
+    
+    $select_products=$conn->prepare("SELECT * FROM products ORDER BY time_added DESC LIMIT ?,?");
+    
+    // bindValue will allow us to use an integer in the SQL statement, which we need to use for the LIMIT clause
+    $select_products->bindValue(1, ($current_page - 1) * $num_products_on_each_page, PDO::PARAM_INT);
+    $select_products->bindValue(2, $num_products_on_each_page, PDO::PARAM_INT);
+    $select_products->execute();
+    
+    // Fetch the products from the database and return the result as an Array
+    $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
+
+    
+    echo "<div class='products-wrapper'>";
+    foreach ($result as $column){
+        //displaying text with more than 50 characters
+        $text = $column['product_description'];
+        $maxPos = 25;
+        if (strlen($text) > $maxPos)
+        {
+            $lastPos = ($maxPos - 3) - strlen($text);
+            $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
+        }
+        echo "<a href='main.php?page=product_details&product_id=".$column['product_id']."' class='product'>
+        <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
+        <span class='name'>".$column['product_name']."</span>
+        <span class='price'>Ksh ".number_format($column['price'])."
+        ";
+        if ($column['rrp']>0) {
+            echo "<span class='rrp'>Ksh ".number_format($column['rrp'])."</span>";
+        }
+        echo "</span></a>";
+    }
+    echo "</div>";
+
+    // Get the total number of products
+    $total_products = $conn->query('SELECT * FROM products')->rowCount();
+
+    echo "<div class='buttons'>";
+    if ($current_page>1) {
+        echo "<a href='main.php?page=products&p=".($current_page-1)."'>&laquo; Prev</a>";
+    }
+    if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
+        echo "<a href='main.php?page=products&p=".($current_page+1)."'>Next &raquo;</a>";
+    }
+    echo "</div>";
+}
+}
+
+
+# search products
+function search_products()
+{
+    global $conn;
+    // The amounts of products to show on each page
+    $num_products_on_each_page = 8;
+    // The current page - in the URL, will appear as main.php?page=products&p=1, main.php?page=products&p=2, etc...
+    $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
+
+    if (isset($_GET['search_data_product'])) {
+        $product_value=$_GET['search_product'];
+    
+    $select_products=$conn->prepare("SELECT * FROM products WHERE keywords LIKE '%$product_value%' LIMIT ?,?");
+    // bindValue will allow us to use an integer in the SQL statement, which we need to use for the LIMIT clause
+    $select_products->bindValue(1, ($current_page - 1) * $num_products_on_each_page, PDO::PARAM_INT);
+    $select_products->bindValue(2, $num_products_on_each_page, PDO::PARAM_INT);
+    $select_products->execute();
+    
+    // Fetch the products from the database and return the result as an Array
+    $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
+
+    if(count($result)==0){
+        echo "<h1>Product not available</h1>";
+        exit;
+    }
+    echo "<div class='products-wrapper'>";
+    foreach ($result as $column){
+        //displaying text with more than 50 characters
+        $text = $column['product_description'];
+        $maxPos = 25;
+        if (strlen($text) > $maxPos)
+        {
+            $lastPos = ($maxPos - 3) - strlen($text);
+            $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
+        }
+        echo "<a href='main.php?page=product_details&product_id=".$column['product_id']."' class='product'>
+        <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
+        <span class='name'>".$column['product_name']."</span>
+        <span class='price'>Ksh ".number_format($column['price'])."
+        ";
+        if ($column['rrp']>0) {
+            echo "<span class='rrp'>Ksh ".number_format($column['rrp'])."</span>";
+        }
+        echo "</span>
+        </a>";
+    }
+    echo "</div>";
+
+     // Get the total number of products
+     $total_products = $conn->query("SELECT * FROM products WHERE keywords LIKE '%$product_value%'")->rowCount();
+
+     echo "<div class='buttons'>";
+     if ($current_page>1) {
+         echo "<a href='main.php?page=products&p=".($current_page-1)."'>&laquo; Prev</a>";
+     }
+     if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
+         echo "<a href='main.php?page=products&p=".($current_page+1)."'>Next &raquo;</a>";
+     }
+     echo "</div>";
+}
+}
+
+
+//getting products from specific categories
+function  category_products()
+{
+    global $conn;
+    // The amounts of products to show on each page
+    $num_products_on_each_page = 8;
+    // The current page - in the URL, will appear as main.php?page=products&p=1, main.php?page=products&p=2, etc...
+    $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
+
+    if (isset($_GET['category_id'])) {
+
+    $category_id=$_GET['category_id'];
+    
+    $select_products=$conn->prepare("SELECT * FROM products WHERE category_id=$category_id LIMIT ?,?");
+    
+    // bindValue will allow us to use an integer in the SQL statement, which we need to use for the LIMIT clause
+    $select_products->bindValue(1, ($current_page - 1) * $num_products_on_each_page, PDO::PARAM_INT);
+    $select_products->bindValue(2, $num_products_on_each_page, PDO::PARAM_INT);
+    $select_products->execute();
+    
+    // Fetch the products from the database and return the result as an Array
+    $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($result)==0) {
+        echo "<h1>No products in stock for this category</h1>";
+        exit;
+    }
+
+    echo "<div class='products-wrapper'>";
+    foreach ($result as $column){
+        //displaying text with more than 25 characters
+        $text = $column['product_description'];
+        $maxPos = 25;
+        if (strlen($text) > $maxPos)
+        {
+            $lastPos = ($maxPos - 3) - strlen($text);
+            $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
+        }
+        echo "<a href='main.php?page=product_details&product_id=".$column['product_id']."' class='product'>
+        <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
+        <span class='name'>".$column['product_name']."</span>
+        <span class='price'>Ksh ".number_format($column['price'])."
+        ";
+        if ($column['rrp']>0) {
+            echo "<span class='rrp'>Ksh ".number_format($column['rrp'])."</span>";
+        }
+        echo "</span>
+        </a>";
+    }
+    echo "</div>";
+
+    // Get the total number of products
+    $total_products = $conn->query("SELECT * FROM products WHERE category_id=$category_id")->rowCount();
+
+    echo "<div class='buttons'>";
+    if ($current_page>1) {
+        echo "<a href='main.php?page=products&p=".($current_page-1)."'>&laquo; Prev</a>";
+    }
+    if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
+        echo "<a href='main.php?page=products&p=".($current_page+1)."'>Next &raquo;</a>";
+    }
+    echo "</div>";
+}
+}
+
+//function for getting categories to the dropdown in the index.php file
+
+function getcategories()
+{
+    global $conn;
+    $select_category=$conn->prepare("SELECT * FROM categories");
+    //execute query
+    $select_category->execute();
+    
+    $select_category->setFetchMode(PDO::FETCH_ASSOC);
+    $result=$select_category->fetchAll();
+    
+    foreach ($result as $column) {
+        echo "<li>
+        <a class='dropdown-item' href='main.php?page=products&category_id=".$column['category_id']."'>".$column['category_title']."</a>
+        </li>";
+    }
+}
+
+// Template header, feel free to customize this
+function template_header($title)
+{
+    echo <<<EOT
+    <!DOCTYPE html>
+    <html>
+        <head>
+        <meta charset="utf-8">
+        <meta nname="viewport" content="width=device-width, initial-scale=1">
+        <title>$title</title>
+
+        <!-- Favicons -->
+        <link href="images/7660092.jpg" rel="icon">
+        <link href="images/7660092.jpg" rel="apple-touch-icon">
+
+        <!-- bootstrap CSS link -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <!--font awesome link-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!--css file-->
+        <link rel="stylesheet" href="style.css" type="text/css">
+        </head>
+    <body>
+            
+EOT;
+}
+
+// Template footer
+function template_footer()
+{
+    $year = date('Y');
+    echo <<<EOT
+            <footer>
+                <!-- Copyright -->
+                <div class="text-center content-wrapper">
+                  <p>&copy; $year, Pudfra-Shop</p>
+                </div>
+                <!-- Copyright -->
+            </footer>
+        <!--bootstrap Js link -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        </body>
+        </html>
+    EOT;
+    }
+
+function cart()
+{
+        global $conn;
+    // If the user clicked the add to cart button on the product page we can check for the form data
+    if (isset($_POST['product_id'], $_POST['quantity']) && is_numeric($_POST['product_id']) && is_numeric($_POST['quantity'])) {
+    // Set the post variables so we easily identify them, also make sure they are integer
+    $product_id = (int)$_POST['product_id'];
+    $quantity = (int)$_POST['quantity'];
+    // Prepare the SQL statement, we basically are checking if the product exists in our databaser
+    $stmt = $conn->prepare('SELECT * FROM products WHERE product_id = ?');
+    $stmt->execute([$_POST['product_id']]);
+    // Fetch the product from the database and return the result as an Array
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Check if the product exists (array is not empty)
+    if ($product && $quantity > 0) {
+        // Product exists in database, now we can create/update the session variable for the cart
+        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+            if (array_key_exists($product_id, $_SESSION['cart'])) {
+                // Product exists in cart so just update the quanity
+                $_SESSION['cart'][$product_id] += $quantity;
+            } else {
+                // Product is not in cart so add it
+                $_SESSION['cart'][$product_id] = $quantity;
+            }
+        } else {
+            // There are no products in cart, this will add the first product to cart
+            $_SESSION['cart'] = array($product_id => $quantity);
+        }
+    }
+    // Prevent form resubmission...
+    header('location: main.php?page=cart');
+    exit;
+}
+
+    // Remove product from cart, check for the URL param "remove", this is the product id, make sure it's a number and check if it's in the cart
+if (isset($_GET['remove']) && is_numeric($_GET['remove']) && isset($_SESSION['cart']) && isset($_SESSION['cart'][$_GET['remove']])) {
+    // Remove the product from the shopping cart
+    unset($_SESSION['cart'][$_GET['remove']]);
+}
+
+// Update product quantities in cart if the user clicks the "Update" button on the shopping cart page
+if (isset($_POST['update']) && isset($_SESSION['cart'])) {
+    // Loop through the post data so we can update the quantities for every product in cart
+    foreach ($_POST as $k => $v) {
+        if (strpos($k, 'quantity') !== false && is_numeric($v)) {
+            $id = str_replace('quantity-', '', $k);
+            $quantity = (int)$v;
+            // Always do checks and validation
+            if (is_numeric($id) && isset($_SESSION['cart'][$id]) && $quantity > 0) {
+                // Update new quantity
+                $_SESSION['cart'][$id] = $quantity;
+            }
+        }
+    }
+    // Prevent form resubmission...
+    header('location: main.php?page=cart');
+    exit;
+}
+
+// Send the user to the place order page if they click the Place Order button, also the cart should not be empty
+if (isset($_POST['placeorder']) && isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    header('Location: main.php?page=placeorder');
+    exit;
+}
+}
+?>

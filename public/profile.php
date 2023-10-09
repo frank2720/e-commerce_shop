@@ -1,17 +1,8 @@
 <?php
-include_once 'functions/common.php';
-include_once 'database/connection.php';
 
-if (!isset($_SESSION['loggedin'])) {
-    header('Location: userauth/login.html');
-    exit;
-}
-$ses_id = $_SESSION['id'];
+require __DIR__ . '/../src/bootstrap.php';
+require_login();
 
-$stmt = $conn->prepare('SELECT * FROM accounts WHERE id=?');
-$stmt->bindParam(1,$ses_id);
-$stmt->execute();
-$user = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <?=template_header('Profile')?>
 <header>
@@ -37,20 +28,18 @@ $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="loggedin">
         <p>Your account details are below:</p>
         <table>
-            <?php foreach($user as $user):?>
             <tr>
                 <td>Username:</td>
-                <td><?=$_SESSION['name']?></td>
+                <td><?= current_user() ?></td>
             </tr>
             <tr>
                 <td>Email:</td>
-                <td><?=$user['email']?></td>
+                <td>email</td>
             </tr>
             <tr>
                 <td>Phone number:</td>
-                <td><?=$user['phone']?></td>
+                <td>number</td>
             </tr>
-            <?php endforeach;?>
         </table>
 	</div>
 </div>

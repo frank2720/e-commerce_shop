@@ -1,5 +1,7 @@
 <?php
 include_once 'functions/common.php';
+
+require __DIR__ . '/../src/bootstrap.php';
 ?>
 
 <?=template_header('Products')?>
