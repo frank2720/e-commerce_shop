@@ -14,7 +14,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>Pudfra-Shop</h1>
         <nav>
             <a href="home.php">Home</a>
-            <a href="home.php?page=products">Products</a>
+            <a href="products.php">Products</a>
 
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
@@ -36,13 +36,13 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         
         <div class ="link-icons">
-            <a href="home.php?page=cart">
+            <a href="cart.php">
                 <i class="fas fa-shopping-cart"></i><span><?=$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;?></span>
             </a>
         </div>
 
         <div class="link-icons">
-            <a href="home.php?page=profile"><i class="fas fa-user-circle"></i>Profile</a>
+            <a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
         </div>
         <?php
         if (isset($_SESSION['loggedin'])) {
@@ -52,7 +52,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             ";
         }else {
             echo "<div class='link-icons'>
-            <a href='userauth/login.html'><i class='fa fa-sign-in'></i>Login</a>
+            <a href='userauth/login.html'></i>Login | Signup</a>
             </div>
             ";
         }

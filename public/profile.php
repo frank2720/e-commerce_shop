@@ -4,7 +4,7 @@ require __DIR__ . '/../src/bootstrap.php';
 require_login();
 
 ?>
-<?=template_header('Profile')?>
+<?php view('page_header', ['title' => 'Profile']) ?>
 <header>
     <div class="content-wrapper">
         <h1>Pudfra-Shop</h1>
@@ -45,4 +45,4 @@ require_login();
 </div>
 </main>
 
-<?=template_footer()?>
+<?php view('page_footer') ?>
