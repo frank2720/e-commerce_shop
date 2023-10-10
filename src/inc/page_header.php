@@ -6,8 +6,8 @@
         <title><?= $title ?? 'Pudfra' ?></title>
 
         <!-- Favicons -->
-        <link href="images/7660092.jpg" rel="icon">
-        <link href="images/7660092.jpg" rel="apple-touch-icon">
+        <link href="imgs/favicon.jpg" rel="icon">
+        <link href="imgs/favicon.jpg" rel="apple-touch-icon">
 
         <!-- bootstrap CSS link -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">

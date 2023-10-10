@@ -1,17 +1,16 @@
 <?php
-include_once 'functions/common.php';
 
 require __DIR__ . '/../src/bootstrap.php';
 ?>
 
-<?=template_header('Products')?>
+<?php view('page_header', ['title' => 'Products']) ?>
 
 <header>
     <div class="content-wrapper">
         <h1>Pudfra-Shop</h1>
         <nav>
-            <a href="main.php">Home</a>
-            <a href="main.php?page=products">Products</a>
+            <a href="home.php">Home</a>
+            <a href="products.php">Products</a>
 
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
@@ -32,17 +31,17 @@ require __DIR__ . '/../src/bootstrap.php';
         </div>
         
         <div class ="link-icons">
-            <a href="main.php?page=cart">
+            <a href="cart.php">
                 <i class="fas fa-shopping-cart"></i><span><?=$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;?></span>
             </a>
         </div>
 
         <div class="link-icons">
-            <a href="main.php?page=profile"><i class="fas fa-user-circle"></i>Profile</a>
+            <a href="profile.php"><i class="fas fa-user-circle"></i></a>
         </div> 
         
         <?php
-        if (isset($_SESSION['loggedin'])) {
+        if (isset($_SESSION['username'])) {
             echo "<div class='link-icons'>
             <a href='logout.php'><i class='fa fa-sign-out'></i>Logout</a>
             </div>
@@ -65,4 +64,4 @@ require __DIR__ . '/../src/bootstrap.php';
     ?>
 </div>
 </main>
-<?=template_footer()?>
+<?php view('page_footer') ?>
