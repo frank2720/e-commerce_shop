@@ -1,15 +1,16 @@
 <?php
-include_once 'database/connection.php';
-include_once 'functions/common.php';
+
+require __DIR__ . '/../src/bootstrap.php';
+
 if (isset($_GET['product_id'])) {
     // Prepare statement and execute, prevents SQL injection
-    $stmt = $conn->prepare('SELECT * FROM products WHERE product_id = ?');
+    $stmt = db()->prepare('SELECT * FROM products WHERE product_id = ?');
     $stmt->execute([$_GET['product_id']]);
     // Fetch the product from the database and return the result as an Array
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 ?>
-<?=template_header('product details')?>
+<?php view('page_header', ['title' => 'Home']) ?>
 <header>
     <div class="content-wrapper">
         <h1>Pudfra-Shop</h1>
@@ -66,4 +67,4 @@ if (isset($_GET['product_id'])) {
 </div>
 <!--Main layout-->
 </main>
-<?=template_footer()?>
+<?php view('page_footer') ?>

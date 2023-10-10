@@ -62,7 +62,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <h2>Recently Added Products</h2>
             <div class="products">
                 <?php foreach ($recently_added_products as $product): ?>
-                    <a href="home.php?page=product_details&product_id=<?=$product['product_id']?>" class="product">
+                    <a href="product_details.php?product_id=<?=$product['product_id']?>" class="product">
                     <img src="admin_page/actions/<?=$product['product_image']?>" width="200" height="200" alt="<?=$product['product_name']?>">
                     <span class="name"><?=$product['product_name']?></span>
                     <span class="price">

@@ -138,7 +138,7 @@ function getproducts()
             $lastPos = ($maxPos - 3) - strlen($text);
             $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
         }
-        echo "<a href='home.php?page=product_details&product_id=".$column['product_id']."' class='product'>
+        echo "<a href='product_details.php?product_id=".$column['product_id']."' class='product'>
         <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
         <span class='name'>".$column['product_name']."</span>
         <span class='price'>Ksh ".number_format($column['price'])."
