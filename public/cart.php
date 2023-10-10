@@ -1,6 +1,7 @@
 <?php
-include_once 'database/connection.php';
-include_once 'functions/common.php';
+
+require __DIR__ . '/../src/bootstrap.php';
+
 cart();
 // Check the session variable for products in cart
 $products_in_cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
@@ -11,7 +12,7 @@ if ($products_in_cart) {
     // There are products in the cart so we need to select those products from the database
     // Products in cart array to question mark string array, we need the SQL statement to include IN (?,?,?,...etc)
     $array_to_question_marks = implode(',', array_fill(0, count($products_in_cart), '?'));
-    $stmt = $conn->prepare('SELECT * FROM products WHERE product_id IN (' . $array_to_question_marks . ')');
+    $stmt = db()->prepare('SELECT * FROM products WHERE product_id IN (' . $array_to_question_marks . ')');
     // We only need the array keys, not the values, the keys are the id's of the products
     $stmt->execute(array_keys($products_in_cart));
     // Fetch the products from the database and return the result as an Array
@@ -23,17 +24,17 @@ if ($products_in_cart) {
 }
 ?>
 
-<?=template_header('Cart')?>
+<?php view('page_header', ['title' => 'Cart details']) ?>
 
 <header>
     <div class="content-wrapper">
         <h1>Pudfra-Shop</h1>
         <nav>
-            <a href="main.php">Home</a>
-            <a href="main.php?page=products">Products</a>
+            <a href="home.php">Home</a>
+            <a href="products.php">Products</a>
         </nav>
         <div class="link-icons">
-            <a href="main.php?page=cart">
+            <a href="cart.php">
                 <i class="fas fa-shopping-cart"></i><span><?=$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;?></span>
             </a>
         </div>
@@ -41,7 +42,7 @@ if ($products_in_cart) {
 </header>
 <main>
 <div class="cart content-wrapper">
-    <form action="main.php?page=cart" method="post">
+    <form action="cart.php" method="post">
         <table>
             <thead>
                 <tr>
@@ -60,14 +61,14 @@ if ($products_in_cart) {
                 <?php foreach ($products as $product): ?>
                 <tr>
                     <td class="img">
-                        <a href="main.php?page=product_details&product_id=<?=$product['product_id']?>">
+                        <a href="product_details.php?product_id=<?=$product['product_id']?>">
                             <img src="admin_page/actions/<?=$product['product_image']?>" width="50" height="50" alt="<?=$product['product_name']?>">
                         </a>
                     </td>
                     <td>
-                        <a href="main.php?page=product_details&product_id=<?=$product['product_id']?>"><?=$product['product_name']?></a>
+                        <a href="product_details.php?product_id=<?=$product['product_id']?>"><?=$product['product_name']?></a>
                         <br>
-                        <a href="main.php?page=cart&remove=<?=$product['product_id']?>" class="remove">Remove</a>
+                        <a href="cart.php?remove=<?=$product['product_id']?>" class="remove">Remove</a>
                     </td>
                     <td class="price">Ksh <?=number_format($product['price'])?></td>
                     <td class="quantity">
@@ -91,4 +92,4 @@ if ($products_in_cart) {
 </div>
 </main>
 
-<?=template_footer()?>
+<?php view('page_footer') ?>

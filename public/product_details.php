@@ -48,7 +48,7 @@ if (isset($_GET['product_id'])) {
             <span class="rrp">Ksh <?=number_format($product['rrp'])?></span>
             <?php endif; ?>
         </span>
-        <form action="main.php?page=cart" method="post">
+        <form action="cart.php" method="post">
             <input type="number" name="quantity" value="1" min="1" max="<?=$product['quantity']?>" placeholder="Quantity" required>
             <input type="hidden" name="product_id" value="<?=$product['product_id']?>">
             <input type="submit" value="Add To Cart">

@@ -37,22 +37,15 @@ require __DIR__ . '/../src/bootstrap.php';
         </div>
 
         <div class="link-icons">
-            <a href="profile.php"><i class="fas fa-user-circle"></i></a>
-        </div> 
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo "<a href='profile.php'><i class='fas fa-user-circle'></i><b>".$_SESSION['username']."</b></a>";
+            }else {
+                echo "<a href='login.php'></i><b>Login </b>|<b> Signup</b></a>";
+            }   
+            ?>
+        </div>
         
-        <?php
-        if (isset($_SESSION['username'])) {
-            echo "<div class='link-icons'>
-            <a href='logout.php'><i class='fa fa-sign-out'></i>Logout</a>
-            </div>
-            ";
-        }else {
-            echo "<div class='link-icons'>
-            <a href='userauth/login.html'><i class='fa fa-sign-in'></i>Login</a>
-            </div>
-            ";
-        }
-        ?> 
     </div>
 </header>
 <main>
