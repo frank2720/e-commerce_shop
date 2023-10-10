@@ -104,7 +104,7 @@
   main .featured {
     display: flex;
     flex-direction: column;
-    background-image: url(imgs/pexels-nataliya-vaitkevich-6214388.jpg);
+    background-image: url(../imgs/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 600px;
