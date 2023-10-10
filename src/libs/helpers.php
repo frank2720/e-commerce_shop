@@ -112,7 +112,7 @@ function getproducts()
 {
     // The amounts of products to show on each page
     $num_products_on_each_page = 8;
-    // The current page - in the URL, will appear as home.php?page=products&p=1, home.php?page=products&p=2, etc...
+    // The current page - in the URL, will appear as products.php?p=1, products.php?p=2, etc...
     $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
 
     if (!isset($_GET['category_id'])) {
@@ -155,10 +155,10 @@ function getproducts()
 
     echo "<div class='buttons'>";
     if ($current_page>1) {
-        echo "<a href='home.php?page=products&p=".($current_page-1)."'>&laquo; Prev</a>";
+        echo "<a href='products.php?p=".($current_page-1)."'>&laquo; Prev</a>";
     }
     if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
-        echo "<a href='home.php?page=products&p=".($current_page+1)."'>Next &raquo;</a>";
+        echo "<a href='products.php?p=".($current_page+1)."'>Next &raquo;</a>";
     }
     echo "</div>";
 }
@@ -170,7 +170,7 @@ function search_products()
 {
     // The amounts of products to show on each page
     $num_products_on_each_page = 8;
-    // The current page - in the URL, will appear as home.php?page=products&p=1, home.php?page=products&p=2, etc...
+    // The current page - in the URL, will appear as products.php?p=1, products.php?p=2, etc...
     $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
 
     if (isset($_GET['search_data_product'])) {
@@ -217,10 +217,10 @@ function search_products()
 
      echo "<div class='buttons'>";
      if ($current_page>1) {
-         echo "<a href='home.php?page=products&p=".($current_page-1)."'>&laquo; Prev</a>";
+         echo "<a href='products.php?p=".($current_page-1)."'>&laquo; Prev</a>";
      }
      if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
-         echo "<a href='home.php?page=products&p=".($current_page+1)."'>Next &raquo;</a>";
+         echo "<a href='products.php?p=".($current_page+1)."'>Next &raquo;</a>";
      }
      echo "</div>";
 }
@@ -232,7 +232,7 @@ function  category_products()
 {
     // The amounts of products to show on each page
     $num_products_on_each_page = 8;
-    // The current page - in the URL, will appear as home.php?page=products&p=1, home.php?page=products&p=2, etc...
+    // The current page - in the URL, will appear as products.php?p=1, products.php?p=2, etc...
     $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
 
     if (isset($_GET['category_id'])) {
@@ -282,10 +282,10 @@ function  category_products()
 
     echo "<div class='buttons'>";
     if ($current_page>1) {
-        echo "<a href='home.php?page=products&p=".($current_page-1)."'>&laquo; Prev</a>";
+        echo "<a href='products.php?p=".($current_page-1)."'>&laquo; Prev</a>";
     }
     if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
-        echo "<a href='home.php?page=products&p=".($current_page+1)."'>Next &raquo;</a>";
+        echo "<a href='products.php?p=".($current_page+1)."'>Next &raquo;</a>";
     }
     echo "</div>";
 }
@@ -341,7 +341,7 @@ function cart()
         }
     }
     // Prevent form resubmission...
-    header('location: home.php?page=cart');
+    header('location: cart.php');
     exit;
 }
 
@@ -366,13 +366,13 @@ if (isset($_POST['update']) && isset($_SESSION['cart'])) {
         }
     }
     // Prevent form resubmission...
-    header('location: home.php?page=cart');
+    header('location: cart.php');
     exit;
 }
 
 // Send the user to the place order page if they click the Place Order button, also the cart should not be empty
 if (isset($_POST['placeorder']) && isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    header('Location: home.php?page=placeorder');
+    header('Location: placeorder.php');
     exit;
 }
 }
