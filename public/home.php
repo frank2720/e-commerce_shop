@@ -46,7 +46,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if (isset($_SESSION['username'])) {
                 echo "<a href='profile.php'><i class='fas fa-user-circle'></i><b>".$_SESSION['username']."</b></a>";
             }else {
-                echo "<a href='login.php'></i><b>Login</b>|<b>Signup</b></a>";
+                echo "<a href='login.php'></i><b>Login </b>|<b> Signup</b></a>";
             }   
             ?>
         </div>

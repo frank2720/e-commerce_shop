@@ -199,7 +199,7 @@ function search_products()
             $lastPos = ($maxPos - 3) - strlen($text);
             $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
         }
-        echo "<a href='home.php?page=product_details&product_id=".$column['product_id']."' class='product'>
+        echo "<a href='product_details.php?product_id=".$column['product_id']."' class='product'>
         <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
         <span class='name'>".$column['product_name']."</span>
         <span class='price'>Ksh ".number_format($column['price'])."
@@ -264,7 +264,7 @@ function  category_products()
             $lastPos = ($maxPos - 3) - strlen($text);
             $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
         }
-        echo "<a href='home.php?page=product_details&product_id=".$column['product_id']."' class='product'>
+        echo "<a href='product_details?product_id=".$column['product_id']."' class='product'>
         <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
         <span class='name'>".$column['product_name']."</span>
         <span class='price'>Ksh ".number_format($column['price'])."
@@ -304,7 +304,7 @@ function getcategories()
     
     foreach ($result as $column) {
         echo "<li>
-        <a class='dropdown-item' href='home.php?page=products&category_id=".$column['category_id']."'>".$column['category_title']."</a>
+        <a class='dropdown-item' href='products.php?category_id=".$column['category_id']."'>".$column['category_title']."</a>
         </li>";
     }
 }
