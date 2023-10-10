@@ -35,7 +35,7 @@ if (is_post_request()) {
     }
 
     // login successfully
-    redirect_to('index.php');
+    redirect_to('home.php');
 
 } else if (is_get_request()) {
     [$errors, $inputs] = session_flash('errors', 'inputs');
