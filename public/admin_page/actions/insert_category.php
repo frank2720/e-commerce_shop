@@ -1,5 +1,6 @@
 <?php
-include_once '../database/connection.php';
+
+require __DIR__ . '/../../../src/bootstrap.php';
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
   
@@ -8,7 +9,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   
   //count the number or rows that contains the category
   $sql_select="SELECT COUNT(*) FROM categories WHERE category_title='$category'";
-  $select=$conn->query($sql_select);
+  $select=db()->query($sql_select);
   $count=$select->fetchColumn();
   
   //check if the category already exist.
@@ -18,7 +19,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     
     //insert categories if it does not exist
     $sql_insert="INSERT INTO categories (category_title) VALUES ('$category')";
-    $insert=$conn->exec($sql_insert);
+    $insert=db()->exec($sql_insert);
 
     if($insert){
       echo "<script>alert('category added successfully')</script>";

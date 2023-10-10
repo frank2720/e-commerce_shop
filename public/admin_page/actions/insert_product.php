@@ -1,6 +1,7 @@
 <?php
-//connect to database
-include_once '../../database/connection.php';
+
+require __DIR__ . '/../../../src/bootstrap.php';
+
 if($_SERVER['REQUEST_METHOD']=='POST'){
     // defining values
     $name=$_POST['product_name'];
@@ -30,7 +31,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 move_uploaded_file($tempname,$imagename);
                 
                 $sql="INSERT INTO products (product_name,category_id,price,product_image,keywords,product_description) VALUES ('$name','$cat','$price','$imagename','$keywords','$description')";
-                $insert=$conn->exec($sql);
+                $insert=db()->exec($sql);
                 
                 if ($insert) {
                     echo "<script>alert('product added successfully')</script>";
@@ -95,7 +96,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 <select id="category" required name="product_category">
                     <option selected disabled class="text-primary">Select category</option>
                     <?php
-                    $sql=$conn->prepare("SELECT * FROM categories");
+                    $sql=db()->prepare("SELECT * FROM categories");
                     $sql->execute();
                     
                     $r=$sql->setFetchMode(PDO::FETCH_ASSOC);
