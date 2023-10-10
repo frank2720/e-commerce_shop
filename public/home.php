@@ -83,5 +83,4 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
         </main>
-        
-<?=template_footer()?>
+<?php view('page_footer') ?>

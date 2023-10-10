@@ -1,8 +1,7 @@
-<?= $year = date('Y');?>
 <footer>
     <!-- Copyright -->
     <div class="text-center content-wrapper">
-        <p>&copy; <?=$year?>, Pudfra-Shop</p>
+        <p>&copy; <?= date('Y');?>, Pudfra-Shop</p>
     </div>
     <!-- Copyright -->
 </footer>
