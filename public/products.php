@@ -39,7 +39,17 @@ require __DIR__ . '/../src/bootstrap.php';
         <div class="link-icons">
             <?php
             if (isset($_SESSION['username'])) {
-                echo "<a href='profile.php'><i class='fas fa-user-circle'></i><b>".$_SESSION['username']."</b></a>";
+                echo "<div class='dropdown'>
+                <a class='nav-link dropdown-toggle' href='' id='profiledetails' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                <img style='height: 1.5em;display: inline-block' src='imgs/profile.png'>
+                <b>".ucfirst($_SESSION['username'])."</b>
+                </a>
+                <ul class='dropdown-menu' aria-labelledby='profiledetails'>
+                    <li><a class='dropdown-item' href='profile.php'>Account</a></li>
+                    <hr>
+                    <li><a class='dropdown-item' href='logout.php'>Logout</a></li>
+                </ul>
+                </div>";
             }else {
                 echo "<a href='login.php'></i><b>Login </b>|<b> Signup</b></a>";
             }   
