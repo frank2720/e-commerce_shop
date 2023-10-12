@@ -221,12 +221,14 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <a href="product_details.php?product_id=<?=$product['product_id']?>" class="text-reset">
               <h5 class="card-title mb-2"><?=ucfirst(strtolower($product['product_name']))?></h5>
             </a>
-            <h6 class="mb-3 price">
-            <?php if ($product['rrp'] > $product['price']): ?>
-              <s>KES<?=number_format($product['rrp'])?></s>
-            <?php endif; ?>
-              <strong class="ms-2 sale">KES <?=number_format($product['price'])?></strong>
-            </h6>
+              <?php
+              if ($product['rrp'] > $product['price']) {
+                echo "<h6 class='mb-3 price'><s>KES".number_format($product['rrp'])."</s>
+                <strong class='ms-2 sale'>KES ".number_format($product['price'])."</strong></h6>";
+              }else{
+                echo "<h6 class='mb-3 price'>KES ".number_format($product['price'])."</h6>";
+              }
+              ?>
           </div>
         </div>
       </div>
