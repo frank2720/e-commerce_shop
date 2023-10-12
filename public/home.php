@@ -86,7 +86,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 echo "<div class='dropdown'>
                 <a class='dropdown-toggle d-flex align-items-center hidden-arrow' href='' id='profiledetails' role='button' data-mdb-toggle='dropdown' aria-expanded='false'>
                 <img class='rounded-circle' height='25' loading='lazy' src='imgs/profile.png'>
-                <b>".ucfirst($_SESSION['username'])."</b>
+                <b>".ucfirst(strtolower($_SESSION['username']))."</b>
                 </a>
                 <ul class='dropdown-menu dropdown-menu-end' aria-labelledby='profiledetails'>
                     <li><a class='dropdown-item' href='profile.php'>My profile</a></li>
@@ -189,223 +189,50 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- Products -->
   <section>
   <div class="text-center">
+
     <div class="row">
-      
+    <?php foreach ($recently_added_products as $product): ?>
       <div class="col-lg-3 col-md-6 mb-4">
         <div class="card">
           <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
             data-mdb-ripple-color="light">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"
+            <img src="admin_page/actions/<?=$product['product_image']?>"
+            width="371" height="395"
               class="w-100" />
-            <a href="#!">
+            <a href="product_details.php?product_id=<?=$product['product_id']?>">              
               <div class="mask">
                 <div class="d-flex justify-content-start align-items-end h-100">
-                  <h5><span class="badge bg-dark ms-2">NEW</span></h5>
+                <?php if ($product['rrp'] > $product['price']): ?>
+                  <h5>
+                    <span class="badge sale-badge ms-2">
+                      <?=round((($product['price']/$product['rrp'])*100)-100)?>%
+                    </span>
+                  </h5>
+                <?php endif; ?>
                 </div>
               </div>
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-2">Denim shirt</h5>
-            </a>
-            <a href="" class="text-reset ">
-              <p>Shirt</p>
-            </a>
-            <h6 class="mb-3 price">120$</h6>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-            data-mdb-ripple-color="light">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg"
-              class="w-100" />
-            <a href="#!">  
-              <div class="mask">
-                <div class="d-flex justify-content-start align-items-end h-100">
-                  <h5><span class="badge bg-primary ms-2">bestseller</span></h5>
-                </div>
-              </div>
-              <div class="hover-overlay">
+            <div class="hover-overlay">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
               </div>
             </a>
           </div>
           <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-2">Sweatshirt</h5>
-            </a>
-            <a href="" class="text-reset ">
-              <p>Sport wear</p>
-            </a>
-            <h6 class="mb-3 price">139$</h6>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-            data-mdb-ripple-color="light">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14.jpg"
-              class="w-100" />
-            <a href="#!">              
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-2">Grey blouse</h5>
-            </a>
-            <a href="" class="text-reset ">
-              <p>Sport wear</p>
-            </a>
-            <h6 class="mb-3 price">99$</h6>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15.jpg"
-              class="w-100" />
-            <a href="#!">
-              <div class="mask">
-                <div class="d-flex justify-content-start align-items-end h-100">
-                  <h5><span class="badge sale-badge ms-2">-10%</span></h5>
-                </div>
-              </div>
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-2">Black jacket</h5>
-            </a>
-            <a href="" class="text-reset ">
-              <p>Outwear</p>
+            <a href="product_details.php?product_id=<?=$product['product_id']?>" class="text-reset">
+              <h5 class="card-title mb-2"><?=ucfirst(strtolower($product['product_name']))?></h5>
             </a>
             <h6 class="mb-3 price">
-              <s>199$</s><strong class="ms-2 sale">179$</strong>
+            <?php if ($product['rrp'] > $product['price']): ?>
+              <s>KES<?=number_format($product['rrp'])?></s>
+            <?php endif; ?>
+              <strong class="ms-2 sale">KES <?=number_format($product['price'])?></strong>
             </h6>
           </div>
         </div>
       </div>
+    <?php endforeach; ?>
     </div>
-
-    <div class="row">
-      
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-            data-mdb-ripple-color="light">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg"
-              class="w-100" />
-            <a href="#!">              
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-2">Sweatshirt</h5>
-            </a>
-            <a href="" class="text-reset ">
-              <p>Sport wear</p>
-            </a>
-            <h6 class="mb-3 price">139$</h6>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-            data-mdb-ripple-color="light">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14.jpg"
-              class="w-100" />
-            <a href="#!">
-              <div class="mask">
-                <div class="d-flex justify-content-start align-items-end h-100">
-                  <h5><span class="badge bg-success ms-2">Eco</span></h5>
-                </div>
-              </div>
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-2">Grey blouse</h5>
-            </a>
-            <a href="" class="text-reset ">
-              <p>Sport wear</p>
-            </a>
-            <h6 class="mb-3 price">99$</h6>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15.jpg"
-              class="w-100" />
-            <a href="#!">              
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-2">Black jacket</h5>
-            </a>
-            <a href="" class="text-reset">
-              <p>Outwear</p>
-            </a>
-            <h6 class="mb-3 price">199$</h6>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-            data-mdb-ripple-color="light">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"
-              class="w-100" />
-            <a href="#!">              
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-2">Denim shirt</h5>
-            </a>
-            <a href="" class="text-reset ">
-              <p>Shirt</p>
-            </a>
-            <h6 class="mb-3 price">120$</h6>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </div>
 </section>
   
