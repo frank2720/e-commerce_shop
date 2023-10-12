@@ -133,7 +133,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%282%29.jpg" class="d-block w-100" alt="Wild Landscape"/>
+      <img src="imgs/bdg6.jpg" class="d-block w-100" alt="Wild Landscape"/>
       <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
       <div class="carousel-caption d-none d-sm-block mb-5">
         <h1 class="mb-4">
@@ -197,8 +197,8 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
             data-mdb-ripple-color="light">
             <img src="admin_page/actions/<?=$product['product_image']?>"
-            width="371" height="390"
-              class="w-100" />
+            height="372" width="431"
+            class="w-100" />
             <a href="product_details.php?product_id=<?=$product['product_id']?>">              
               <div class="mask">
                 <div class="d-flex justify-content-start align-items-end h-100">
