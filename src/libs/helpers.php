@@ -141,7 +141,7 @@ function getproducts()
         <div class='card'>
           <div class='bg-image hover-zoom ripple' data-mdb-ripple-color='light'>
             <img src='admin_page/actions/".$column['product_image']."'
-              class='w-100' />
+              class='w-100 card-img' />
             <a href='product_details.php?product_id=".$column['product_id']."'>              
               <div class='hover-overlay'>
                 <div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div>

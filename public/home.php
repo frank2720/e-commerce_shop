@@ -197,8 +197,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
             data-mdb-ripple-color="light">
             <img src="admin_page/actions/<?=$product['product_image']?>"
-            height="431"; width="372";
-            class="w-100" />
+            class="w-100 card-img" />
             <a href="product_details.php?product_id=<?=$product['product_id']?>">              
               <div class="mask">
                 <div class="d-flex justify-content-start align-items-end h-100">
