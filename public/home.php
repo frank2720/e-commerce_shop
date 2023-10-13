@@ -197,7 +197,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
             data-mdb-ripple-color="light">
             <img src="admin_page/actions/<?=$product['product_image']?>"
-            height="372" width="431"
+            height="431"; width="372";
             class="w-100" />
             <a href="product_details.php?product_id=<?=$product['product_id']?>">              
               <div class="mask">
@@ -237,28 +237,6 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
   </div>
 </section>
-  
-<!-- Pagination -->
-  <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">4</a></li>
-    <li class="page-item"><a class="page-link" href="#">5</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>  
-<!-- Pagination -->  
 </div>
 </main>
  <!--Main layout-->

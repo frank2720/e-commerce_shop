@@ -23,3 +23,10 @@ color: #E53935
 .sale-badge {
 background-color: #E53935
 }
+
+footer {
+	position: fixed;
+  left: 0;
+	bottom: 0;
+	width: 100%;
+}

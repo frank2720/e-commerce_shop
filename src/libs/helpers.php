@@ -128,7 +128,6 @@ function getproducts()
     $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
 
     
-    echo "<div class='products-wrapper'>";
     foreach ($result as $column){
         //displaying text with more than 50 characters
         $text = $column['product_description'];
@@ -138,17 +137,29 @@ function getproducts()
             $lastPos = ($maxPos - 3) - strlen($text);
             $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
         }
-        echo "<a href='product_details.php?product_id=".$column['product_id']."' class='product'>
-        <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
-        <span class='name'>".$column['product_name']."</span>
-        <span class='price'>Ksh ".number_format($column['price'])."
-        ";
-        if ($column['rrp']>0) {
-            echo "<span class='rrp'>Ksh ".number_format($column['rrp'])."</span>";
-        }
-        echo "</span></a>";
+        echo "<div class='col-lg-3 col-md-6 mb-4'>
+        <div class='card'>
+          <div class='bg-image hover-zoom ripple' data-mdb-ripple-color='light'>
+            <img src='admin_page/actions/".$column['product_image']."'
+              class='w-100' />
+            <a href='product_details.php?product_id=".$column['product_id']."'>              
+              <div class='hover-overlay'>
+                <div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div>
+              </div>
+            </a>
+          </div>
+          <div class='card-body'>
+            <a href=' class='text-reset'>
+              <h5 class='card-title mb-2'>Black jacket</h5>
+            </a>
+            <a href=' class='text-reset'>
+              <p>Outwear</p>
+            </a>
+            <h6 class='mb-3 price'>199$</h6>
+          </div>
+        </div>
+      </div>";
     }
-    echo "</div>";
 
     // Get the total number of products
     $total_products = db()->query('SELECT * FROM products')->rowCount();
