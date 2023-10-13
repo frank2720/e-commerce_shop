@@ -113,6 +113,7 @@ require __DIR__ . '/../src/bootstrap.php';
   <h1 class="mb-3">Products</h1>
     <div class="row">
       <?=getproducts();?>
+      <?=category_products();?>
     </div>
   </div>
 </section> 

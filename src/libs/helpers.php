@@ -143,9 +143,18 @@ function getproducts()
             <img src='admin_page/actions/".$column['product_image']."'
               class='w-100 card-img' />
             <a href='product_details.php?product_id=".$column['product_id']."'>              
-              <div class='hover-overlay'>
-                <div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div>
-              </div>
+                <div class='mask'>
+                    <div class='d-flex justify-content-start align-items-end h-100'>";
+
+                    if ($column['rrp'] > $column['price']) {
+                        echo "<h5>
+                        <span class='badge sale-badge ms-2'>".
+                          round((($column['price']/$column['rrp'])*100)-100)."%
+                        </span>
+                      </h5>";
+                    }
+                    echo "</div>
+                </div>
             </a>
           </div>
           <div class='card-body'>
@@ -153,10 +162,17 @@ function getproducts()
               <h5 class='card-title mb-2'>".ucfirst(strtolower($column['product_name']))."</h5>
             </a>
             <a href='product_details.php?product_id=".$column['product_id']."' class='text-reset'>
-              <p>".$text."</p>
-            </a>
-            <h6 class='mb-3 price'>199$</h6>
-          </div>
+              <p>".ucfirst($text)."</p>
+            </a>";
+
+            if ($column['rrp'] > $column['price']) {
+              echo "<h6 class='mb-3 price'><s>KES".number_format($column['rrp'])."</s>
+              <strong class='ms-2 sale'>KES ".number_format($column['price'])."</strong></h6>";
+            }else{
+              echo "<h6 class='mb-3 price'>KES ".number_format($column['price'])."</h6>";
+            }
+
+          echo"</div>
         </div>
       </div>";
     }
@@ -166,10 +182,10 @@ function getproducts()
 
     echo "<div class='buttons'>";
     if ($current_page>1) {
-        echo "<a href='products.php?p=".($current_page-1)."'>&laquo; Prev</a>";
+        echo "<a class='btn btn-secondary btn-rounded' href='products.php?p=".($current_page-1)."'><b>&laquo; Prev</b></a>";
     }
     if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
-        echo "<a href='products.php?p=".($current_page+1)."'>Next &raquo;</a>";
+        echo "<a class='btn btn-secondary btn-rounded' href='products.php?p=".($current_page+1)."'><b>Next &raquo;</b></a>";
     }
     echo "</div>";
 }
@@ -200,7 +216,6 @@ function search_products()
         echo "<h1>Product not available</h1>";
         exit;
     }
-    echo "<div class='products-wrapper'>";
     foreach ($result as $column){
         //displaying text with more than 50 characters
         $text = $column['product_description'];
@@ -210,30 +225,57 @@ function search_products()
             $lastPos = ($maxPos - 3) - strlen($text);
             $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
         }
-        echo "<a href='product_details.php?product_id=".$column['product_id']."' class='product'>
-        <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
-        <span class='name'>".$column['product_name']."</span>
-        <span class='price'>Ksh ".number_format($column['price'])."
-        ";
-        if ($column['rrp']>0) {
-            echo "<span class='rrp'>Ksh ".number_format($column['rrp'])."</span>";
-        }
-        echo "</span>
-        </a>";
+        echo "<div class='col-lg-3 col-md-6 mb-4'>
+        <div class='card'>
+          <div class='bg-image hover-zoom ripple' data-mdb-ripple-color='light'>
+            <img src='admin_page/actions/".$column['product_image']."'
+              class='w-100 card-img' />
+            <a href='product_details.php?product_id=".$column['product_id']."'>              
+                <div class='mask'>
+                    <div class='d-flex justify-content-start align-items-end h-100'>";
+
+                    if ($column['rrp'] > $column['price']) {
+                        echo "<h5>
+                        <span class='badge sale-badge ms-2'>".
+                          round((($column['price']/$column['rrp'])*100)-100)."%
+                        </span>
+                      </h5>";
+                    }
+                    echo "</div>
+                </div>
+            </a>
+          </div>
+          <div class='card-body'>
+            <a href='product_details.php?product_id=".$column['product_id']."' class='text-reset'>
+              <h5 class='card-title mb-2'>".ucfirst(strtolower($column['product_name']))."</h5>
+            </a>
+            <a href='product_details.php?product_id=".$column['product_id']."' class='text-reset'>
+              <p>".ucfirst($text)."</p>
+            </a>";
+
+            if ($column['rrp'] > $column['price']) {
+              echo "<h6 class='mb-3 price'><s>KES".number_format($column['rrp'])."</s>
+              <strong class='ms-2 sale'>KES ".number_format($column['price'])."</strong></h6>";
+            }else{
+              echo "<h6 class='mb-3 price'>KES ".number_format($column['price'])."</h6>";
+            }
+
+          echo"</div>
+        </div>
+      </div>";
     }
-    echo "</div>";
 
      // Get the total number of products
      $total_products = db()->query("SELECT * FROM products WHERE keywords LIKE '%$product_value%'")->rowCount();
 
      echo "<div class='buttons'>";
-     if ($current_page>1) {
-         echo "<a href='products.php?p=".($current_page-1)."'>&laquo; Prev</a>";
-     }
-     if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
-         echo "<a href='products.php?p=".($current_page+1)."'>Next &raquo;</a>";
-     }
-     echo "</div>";
+    if ($current_page>1) {
+        echo "<a class='btn btn-secondary btn-rounded' href='products.php?p=".($current_page-1)."'><b>&laquo; Prev</b></a>";
+    }
+    if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
+        echo "<a class='btn btn-secondary btn-rounded' href='products.php?p=".($current_page+1)."'><b>Next &raquo;</b></a>";
+    }
+    echo "</div>";
 }
 }
 
@@ -265,7 +307,6 @@ function  category_products()
         exit;
     }
 
-    echo "<div class='products-wrapper'>";
     foreach ($result as $column){
         //displaying text with more than 25 characters
         $text = $column['product_description'];
@@ -275,28 +316,55 @@ function  category_products()
             $lastPos = ($maxPos - 3) - strlen($text);
             $text = substr($text, 0, strrpos($text, ' ', $lastPos)) . '......';
         }
-        echo "<a href='product_details?product_id=".$column['product_id']."' class='product'>
-        <img src='admin_page/actions/".$column['product_image']."' width='200' height='200' alt='".$column['product_name']." image'>
-        <span class='name'>".$column['product_name']."</span>
-        <span class='price'>Ksh ".number_format($column['price'])."
-        ";
-        if ($column['rrp']>0) {
-            echo "<span class='rrp'>Ksh ".number_format($column['rrp'])."</span>";
-        }
-        echo "</span>
-        </a>";
+        echo "<div class='col-lg-3 col-md-6 mb-4'>
+        <div class='card'>
+          <div class='bg-image hover-zoom ripple' data-mdb-ripple-color='light'>
+            <img src='admin_page/actions/".$column['product_image']."'
+              class='w-100 card-img' />
+            <a href='product_details.php?product_id=".$column['product_id']."'>              
+                <div class='mask'>
+                    <div class='d-flex justify-content-start align-items-end h-100'>";
+
+                    if ($column['rrp'] > $column['price']) {
+                        echo "<h5>
+                        <span class='badge sale-badge ms-2'>".
+                          round((($column['price']/$column['rrp'])*100)-100)."%
+                        </span>
+                      </h5>";
+                    }
+                    echo "</div>
+                </div>
+            </a>
+          </div>
+          <div class='card-body'>
+            <a href='product_details.php?product_id=".$column['product_id']."' class='text-reset'>
+              <h5 class='card-title mb-2'>".ucfirst(strtolower($column['product_name']))."</h5>
+            </a>
+            <a href='product_details.php?product_id=".$column['product_id']."' class='text-reset'>
+              <p>".ucfirst($text)."</p>
+            </a>";
+
+            if ($column['rrp'] > $column['price']) {
+              echo "<h6 class='mb-3 price'><s>KES".number_format($column['rrp'])."</s>
+              <strong class='ms-2 sale'>KES ".number_format($column['price'])."</strong></h6>";
+            }else{
+              echo "<h6 class='mb-3 price'>KES ".number_format($column['price'])."</h6>";
+            }
+
+          echo"</div>
+        </div>
+      </div>";
     }
-    echo "</div>";
 
     // Get the total number of products
     $total_products = db()->query("SELECT * FROM products WHERE category_id=$category_id")->rowCount();
 
     echo "<div class='buttons'>";
     if ($current_page>1) {
-        echo "<a href='products.php?p=".($current_page-1)."'>&laquo; Prev</a>";
+        echo "<a class='btn btn-secondary btn-rounded' href='products.php?p=".($current_page-1)."'><b>&laquo; Prev</b></a>";
     }
     if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
-        echo "<a href='products.php?p=".($current_page+1)."'>Next &raquo;</a>";
+        echo "<a class='btn btn-secondary btn-rounded' href='products.php?p=".($current_page+1)."'><b>Next &raquo;</b></a>";
     }
     echo "</div>";
 }
