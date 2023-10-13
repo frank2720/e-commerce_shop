@@ -131,7 +131,7 @@ function getproducts()
     foreach ($result as $column){
         //displaying text with more than 50 characters
         $text = $column['product_description'];
-        $maxPos = 25;
+        $maxPos = 50;
         if (strlen($text) > $maxPos)
         {
             $lastPos = ($maxPos - 3) - strlen($text);
@@ -149,11 +149,11 @@ function getproducts()
             </a>
           </div>
           <div class='card-body'>
-            <a href=' class='text-reset'>
-              <h5 class='card-title mb-2'>Black jacket</h5>
+            <a href='product_details.php?product_id=".$column['product_id']."' class='text-reset'>
+              <h5 class='card-title mb-2'>".ucfirst(strtolower($column['product_name']))."</h5>
             </a>
-            <a href=' class='text-reset'>
-              <p>Outwear</p>
+            <a href='product_details.php?product_id=".$column['product_id']."' class='text-reset'>
+              <p>".$text."</p>
             </a>
             <h6 class='mb-3 price'>199$</h6>
           </div>
