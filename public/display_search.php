@@ -7,7 +7,7 @@ require __DIR__ . '/../src/bootstrap.php';
 
 
     <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
   <!-- Container wrapper -->
   <div class="container">    
     <!-- Toggle button -->
