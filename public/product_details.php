@@ -139,11 +139,12 @@ if (isset($_GET['product_id'])) {
 
                     <?=$product['product_description']?>
 
-                    <form class="d-flex justify-content-left">
+                    <form class="d-flex justify-content-left" action="cart.php" method="post">
                         <!-- Default input -->
                         <div class="form-outline me-1" style="width: 100px;">
-                            <input type="number" value="1" class="form-control" />
+                            <input type="number" class="form-control" name="quantity" value="1" min="1" max="<?=$product['quantity']?>" placeholder="Quantity" required />
                         </div>
+                        <input type="hidden" name="product_id" value="<?=$product['product_id']?>">
                         <button class="btn btn-primary ms-1" type="submit">
                             Add to cart
                             <i class="fas fa-shopping-cart ms-1"></i>
