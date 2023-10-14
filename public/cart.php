@@ -158,7 +158,7 @@ if ($products_in_cart) {
                         <i class="fas fa-minus"></i>
                       </button>
 
-                      <input id="form1" min="0" name="quantity" value="1" type="number"
+                      <input  min="1" max="<?=$product['quantity']?>" name="quantity-<?=$product['product_id']?>" value="<?=$products_in_cart[$product['product_id']]?>" type="number"
                         class="form-control form-control-sm" />
 
                       <button class="btn btn-link px-2"
@@ -167,7 +167,7 @@ if ($products_in_cart) {
                       </button>
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                      <h6 class="mb-0">Ksh <?=number_format($product['price'])?></h6>
+                      <h6 class="mb-0">Ksh <?=number_format($product['price'] * $products_in_cart[$product['product_id']])?></h6>
                     </div>
                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                       <a href="cart.php?remove=<?=$product['product_id']?>" class="text-muted"><i class="fas fa-times"></i></a>
@@ -186,21 +186,13 @@ if ($products_in_cart) {
               </div>
               <div class="col-lg-4 bg-grey">
                 <div class="p-5">
-                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-                  <hr class="my-4">
 
-                  <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">items <?=$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;?></h5>
-                    <h5>Ksh <?=number_format($subtotal)?></h5>
-                  </div>
-                  <hr class="my-4">
-
-                  <h5 class="text-uppercase mb-3">Give code</h5>
+                  <h5 class="text-uppercase mb-3">Payment</h5>
 
                   <div class="mb-5">
                     <div class="form-outline">
                       <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Examplea2">Enter your code</label>
+                      <label class="form-label" for="form3Examplea2">Enter your M-PESA number</label>
                     </div>
                   </div>
 
@@ -212,7 +204,7 @@ if ($products_in_cart) {
                   </div>
 
                   <button type="button" class="btn btn-dark btn-block btn-lg"
-                    data-mdb-ripple-color="dark">Register</button>
+                    data-mdb-ripple-color="dark">Place Order</button>
 
                 </div>
               </div>
