@@ -124,7 +124,7 @@ if ($products_in_cart) {
 </nav>
 <!-- Navbar -->
 
-<section class="h-100 h-custom" style="background-color:  #eee;">
+<section class="h-100 h-custom">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
@@ -187,7 +187,7 @@ if ($products_in_cart) {
                             </tbody>
                         </table>
                         <div  class="position-relative position-relative-example pt-5">
-                            <div>
+                            <div class="position-absolute top-100 start-50 translate-middle">
                                 <h6 class="mb-0">
                                     <a href="products.php" class="text-body">
                                         <i class="fas fa-long-arrow-alt-left me-2"></i>
@@ -195,7 +195,7 @@ if ($products_in_cart) {
                                     </a>
                                 </h6>
                             </div>
-                            <div class="position-absolute top-100 start-50 translate-middle">
+                            <div class="position-absolute top-100 start-100 translate-middle">
                                 <input type="submit" value="Update" name="update" class="btn btn-dark btn-rounded">
                             </div>
                         </div>

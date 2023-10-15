@@ -27,4 +27,4 @@
     <?= require __DIR__ .'/assets/css/style.css' ?>
 </style>
 </head>
-<body>
+<body style="background-color:  #eee;">
