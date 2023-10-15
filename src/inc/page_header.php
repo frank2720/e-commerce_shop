@@ -8,6 +8,7 @@
     <!-- Favicons -->
     <link href="imgs/favicon.jpg" rel="icon">
     <link href="imgs/favicon.jpg" rel="apple-touch-icon">
+    
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -28,3 +29,4 @@
 </style>
 </head>
 <body style="background-color:  #eee;">
+<?php flash() ?>

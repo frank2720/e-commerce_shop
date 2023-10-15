@@ -71,3 +71,6 @@ footer {
   border-bottom-right-radius: 16px;
   }
   }
+  .error{
+    color: #ff0000;
+  }
