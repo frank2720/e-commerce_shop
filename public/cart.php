@@ -207,13 +207,13 @@ if ($products_in_cart) {
 
                   <h5 class="text-uppercase mb-3">Payment</h5>
 
+                  <form action="cart.php" method="post">
                   <div class="mb-5">
                     <div class="form-outline">
                       <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
                       <label class="form-label" for="form3Examplea2">Enter your M-PESA number</label>
                     </div>
                   </div>
-
                   <hr class="my-4">
 
                   <div class="d-flex justify-content-between mb-5">
@@ -221,8 +221,9 @@ if ($products_in_cart) {
                     <h5>Ksh <?=number_format($subtotal)?></h5>
                   </div>
 
-                  <input type="submit" class="btn btn-dark btn-block btn-lg"
+                  <input type="submit" class="btn btn-dark btn-block btn-lg btn-rounded"
                     data-mdb-ripple-color="dark" value="Place Order" name="placeorder">
+                  </form>
 
                 </div>
               </div>
