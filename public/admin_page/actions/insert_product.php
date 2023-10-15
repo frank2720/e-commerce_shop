@@ -50,8 +50,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         <title>Insert products</title>
 
         <!-- Favicons -->
-        <link href="../assets/img/logo.jpg" rel="icon">
-        <link href="../assets/img/logo.jpg" rel="apple-touch-icon">
+        <link href="../../imgs/favicon.jpg" rel="icon">
+        <link href="../../imgs/favicon.jpg" rel="apple-touch-icon">
 
         <!-- bootstrap CSS link -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -81,12 +81,22 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="ProductName">Price</label>
+                    <label for="Productprice">Price</label>
                 </div>
                 <div class=" col-75">
                     <input type="number" id="Productprice" name="product_price" min="1" placeholder="Kenya shillings" required>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="RetailPrice">Retail Price</label>
+                </div>
+                <div class=" col-75">
+                    <input type="number" id="RetailPrice" name="rrp" min="1" placeholder="Kenya shillings" required>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-25">
                     <label for="category">Category</label>
