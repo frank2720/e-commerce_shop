@@ -124,7 +124,7 @@ if ($products_in_cart) {
 </nav>
 <!-- Navbar -->
 
-<section class="h-100 h-custom" style="background-color: #d2c9ff;">
+<section class="h-100 h-custom" style="background-color:  #eee;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
@@ -133,55 +133,73 @@ if ($products_in_cart) {
             <div class="row g-0">
               <div class="col-lg-8">
                 <div class="p-5">
-                  <div class="d-flex justify-content-between align-items-center mb-5">
+                <div class="d-flex justify-content-between align-items-center mb-5">
                     <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
                     <h6 class="mb-0 text-muted"><?=$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;?> items</h6>
-                  </div>
-                  <hr class="my-4">
-
-                  <?php if (empty($products)): ?>
-                    <h6 class="text-black mb-0 text-center">You have no products added in your Shopping Cart</h6>
-                  <?php else: ?>
-                  <?php foreach ($products as $product): ?>
-                  <div class="row mb-4 d-flex justify-content-between align-items-center">
-                    <div class="col-md-2 col-lg-2 col-xl-2">
-                      <img
-                        src="admin_page/actions/<?=$product['product_image']?>"
-                        class="img-fluid rounded-3" alt="<?=$product['product_name']?>">
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-3">
-                      <h6 class="text-black mb-0"><?=$product['product_name']?></h6>
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        <i class="fas fa-minus"></i>
-                      </button>
-
-                      <input  min="1" max="<?=$product['quantity']?>" name="quantity-<?=$product['product_id']?>" value="<?=$products_in_cart[$product['product_id']]?>" type="number"
-                        class="form-control form-control-sm" />
-
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
-                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                      <h6 class="mb-0">Ksh <?=number_format($product['price'] * $products_in_cart[$product['product_id']])?></h6>
-                    </div>
-                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="cart.php?remove=<?=$product['product_id']?>" class="text-muted"><i class="fas fa-times"></i></a>
-                    </div>
-                  </div>
-
-                  <hr class="my-4">
-                  <?php endforeach; ?>
-                  <?php endif; ?>
-
-                  <div class="pt-5">
-                    <h6 class="mb-0"><a href="products.php" class="text-body"><i
-                          class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
-                  </div>
+                </div>
+                    <form action="cart.php" method="post">
+                        <table class="table align-middle mb-0 bg-white">
+                            <thead class="bg-light">
+                                <tr>
+                                    <td>Product</td>
+                                    <td>Price</td>
+                                    <td>Quantity</td>
+                                    <td>Total</td>
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (empty($products)): ?>
+                                    <tr>
+                                        <td><h6 class="text-black mb-0 text-center">You have no products added in your Shopping Cart</h6></td>
+                                    </tr>
+                                <?php else: ?>
+                                <?php foreach ($products as $product): ?>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                            <a href="product_details.php?product_id=<?=$product['product_id']?>">
+                                            <img src="admin_page/actions/<?=$product['product_image']?>" alt="<?=$product['product_name']?>"
+                                            style="width: 45px; height: 45px"
+                                            class="rounded-circle"/>
+                                            </a>
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1"><?=$product['product_name']?></p>
+                                            </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="fw-normal mb-1">Ksh <?=number_format($product['price'])?></p>
+                                        </td>
+                                        <td>
+                                            <input  min="1" max="<?=$product['quantity']?>" name="quantity-<?=$product['product_id']?>" value="<?=$products_in_cart[$product['product_id']]?>" type="number"
+                                            class="form-control form-control-sm" />
+                                        </td>
+                                        <td>
+                                            <h6 class="mb-0">Ksh <?=number_format($product['price'] * $products_in_cart[$product['product_id']])?></h6>
+                                        </td>
+                                        <td>
+                                            <a href="cart.php?remove=<?=$product['product_id']?>" class="text-muted"><i class="fas fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                        <div  class="position-relative position-relative-example pt-5">
+                            <div>
+                                <h6 class="mb-0">
+                                    <a href="products.php" class="text-body">
+                                        <i class="fas fa-long-arrow-alt-left me-2"></i>
+                                        Back to shop
+                                    </a>
+                                </h6>
+                            </div>
+                            <div class="position-absolute top-100 start-50 translate-middle">
+                                <input type="submit" value="Update" name="update" class="btn btn-dark btn-rounded">
+                            </div>
+                        </div>
+                    </form>
                 </div>
               </div>
               <div class="col-lg-4 bg-grey">
@@ -203,8 +221,8 @@ if ($products_in_cart) {
                     <h5>Ksh <?=number_format($subtotal)?></h5>
                   </div>
 
-                  <button type="button" class="btn btn-dark btn-block btn-lg"
-                    data-mdb-ripple-color="dark">Place Order</button>
+                  <input type="submit" class="btn btn-dark btn-block btn-lg"
+                    data-mdb-ripple-color="dark" value="Place Order" name="placeorder">
 
                 </div>
               </div>
