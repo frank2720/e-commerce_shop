@@ -7,6 +7,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $name=$_POST['product_name'];
     $cat=$_POST['product_category'];
     $price=$_POST['product_price'];
+    $Rprice=$_POST['rrp'];
+    $quantity=$_POST['quantity'];
     $keywords=$_POST['product_keywords'];
     $description=$_POST['about_product'];
 
@@ -30,7 +32,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             if ($uploadOk == true) {
                 move_uploaded_file($tempname,$imagename);
                 
-                $sql="INSERT INTO products (product_name,category_id,price,product_image,keywords,product_description) VALUES ('$name','$cat','$price','$imagename','$keywords','$description')";
+                $sql="INSERT INTO products (product_name,category_id,price,rrp,quantity,product_image,keywords,product_description) VALUES ('$name','$cat','$price','$Rprice','$quantity','$imagename','$keywords','$description')";
                 $insert=db()->exec($sql);
                 
                 if ($insert) {
@@ -94,6 +96,15 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 </div>
                 <div class=" col-75">
                     <input type="number" id="RetailPrice" name="rrp" min="1" placeholder="Kenya shillings" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="quantity">Quantity</label>
+                </div>
+                <div class=" col-75">
+                    <input type="number" id="quantity" name="quantity" min="1" placeholder="Quantity available" required>
                 </div>
             </div>
 
