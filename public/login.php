@@ -15,7 +15,7 @@ require __DIR__ . '/../src/login.php';
                         
                         <?php if (isset($errors['login'])) : ?>
                         <div class="error mb-4">
-                            <?= $errors['login'] ?>
+                            <i><?= $errors['login'] ?></i>
                         </div>
                         <?php endif ?>
                         <form action="login.php" method="post">
