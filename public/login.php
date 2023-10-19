@@ -59,4 +59,4 @@ require __DIR__ . '/../src/login.php';
         </div>
     </div>
 </section>
-<?php view('page_footer') ?>
+<?php view('footer') ?>

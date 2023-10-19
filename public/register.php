@@ -79,4 +79,4 @@ require __DIR__ . '/../src/register.php';
   </div>
 </section>
 
-<?php view('page_footer') ?>
+<?php view('footer') ?>

@@ -119,7 +119,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="imgs/bgd7.jpg" class="d-block w-100" alt="Wild Landscape"/>
+      <img src="imgs/bgd7.jpg" class="d-block w-100"/>
       <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
       <div class="carousel-caption d-none d-sm-block mb-5">
         <h1 class="mb-4">
@@ -132,7 +132,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </div>
     </div>
     <div class="carousel-item">
-      <img src="imgs/bgd1.jpg" class="d-block w-100" alt="Camera"/>
+      <img src="imgs/bgd1.jpg" class="d-block w-100"/>
       <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
       <div class="carousel-caption d-none d-md-block mb-5">
         <h1 class="mb-4">
@@ -145,7 +145,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </div>
     </div>
     <div class="carousel-item">
-      <img src="imgs/bgd8.jpg" class="d-block w-100" alt="Exotic Fruits"/>
+      <img src="imgs/bgd8.jpg" class="d-block w-100"/>
       <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
       <div class="carousel-caption d-none d-md-block mb-5">
         <h1 class="mb-4">
