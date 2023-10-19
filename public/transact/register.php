@@ -29,8 +29,8 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Au
 $curl_post_data = array(
     'ShortCode'=> '600982',
     'ResponseType'=> 'Completed',
-    'ConfirmationURL'=> 'http://localhost/daraja/confirmation_url.php',
-    'ValidationURL'=> 'http://localhost/daraja/validation_url.php',
+    'ConfirmationURL'=> 'https://e70f-102-212-11-14.ngrok-free.app/ecommerce/public/transact/confirmation.php',
+    'ValidationURL'=> 'https://e70f-102-212-11-14.ngrok-free.app/ecommerce/public/transact/validation.php',
 );
 
 $data_string = json_encode($curl_post_data);
