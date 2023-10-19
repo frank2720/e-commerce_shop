@@ -19,6 +19,7 @@ $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 $response = json_decode($response);
 
 $access_token = $response->access_token;
+echo $access_token;
 
 $url = 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl';
 
