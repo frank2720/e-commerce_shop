@@ -75,20 +75,6 @@ if ($products_in_cart) {
       <!-- Left links -->      
     </div>
     <!-- Collapsible wrapper -->
-
-    <form action="display_search.php" method="get" class="d-flex input-group w-auto">
-      <input
-        type="search"
-        class="form-control rounded"
-        placeholder="Search products"
-        aria-label="Search"
-        aria-describedby="search-addon"
-        name="search_product"
-      />
-      <span class="input-group-text border-0" id="search-addon">
-      <input type="submit" name="search_data_product" value="search"/></i>
-      </span>
-    </form>
     
     <!-- Right elements -->
     <div class="d-flex align-items-center">

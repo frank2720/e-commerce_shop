@@ -117,7 +117,7 @@ function getproducts()
 
     if (!isset($_GET['category_id'])) {
     
-    $select_products=db()->prepare("SELECT * FROM products ORDER BY RAND() LIMIT ?,?");
+    $select_products=db()->prepare("SELECT * FROM products LIMIT ?,?");
     
     // bindValue will allow us to use an integer in the SQL statement, which we need to use for the LIMIT clause
     $select_products->bindValue(1, ($current_page - 1) * $num_products_on_each_page, PDO::PARAM_INT);
