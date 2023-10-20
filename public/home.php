@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../src/bootstrap.php';
 
-$stmt = db()->prepare('SELECT * FROM products ORDER BY time_added DESC LIMIT 4');
+$stmt = db()->prepare('SELECT * FROM products ORDER BY time_added DESC LIMIT 8');
 $stmt->execute();
 $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -219,7 +219,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </div>
     <?php endforeach; ?>
     </div>
-    
+    <a href="products.php" class="btn btn-dark btn-lg btn-rounded" role="button" aria-pressed="true">View More Products</a>
   </div>
 </section>
 </div>

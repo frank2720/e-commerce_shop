@@ -30,12 +30,6 @@ background-color: #E53935
   object-fit: contain;
 }
 
-footer {
-  left: 0;
-	bottom: 0;
-	width: 100%;
-}
-
 @media (min-width: 1025px) {
   .h-custom {
   height: 100vh !important;

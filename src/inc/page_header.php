@@ -28,5 +28,5 @@
     <?= require __DIR__ .'/assets/css/style.css' ?>
 </style>
 </head>
-<body style="background-color:  #eee;">
+<body>
 <?php flash() ?>

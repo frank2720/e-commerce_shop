@@ -182,10 +182,10 @@ function getproducts()
 
     echo "<div class='buttons'>";
     if ($current_page>1) {
-        echo "<a class='btn btn-secondary btn-rounded' href='products.php?p=".($current_page-1)."'><b>&laquo; Prev</b></a>";
+        echo "<a class='btn btn-black btn-rounded' href='products.php?p=".($current_page-1)."'><b>&laquo; Prev</b></a>";
     }
     if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($result)) {
-        echo "<a class='btn btn-secondary btn-rounded' href='products.php?p=".($current_page+1)."'><b>Next &raquo;</b></a>";
+        echo "<a class='btn btn-black btn-rounded' href='products.php?p=".($current_page+1)."'><b>Next &raquo;</b></a>";
     }
     echo "</div>";
 }
