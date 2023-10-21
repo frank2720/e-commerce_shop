@@ -10,8 +10,8 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Au
 $curl_post_data = array(
     'ShortCode'=> '174379',
     'ResponseType'=> 'Completed',
-    'ConfirmationURL'=> 'https://e70f-102-212-11-14.ngrok-free.app/ecommerce/public/transact/confirmation.php',
-    'ValidationURL'=> 'https://e70f-102-212-11-14.ngrok-free.app/ecommerce/public/transact/validation.php',
+    'ConfirmationURL'=> 'https://ede8-102-212-11-14.ngrok-free.app/ecommerce/public/transact/confirmation.php',
+    'ValidationURL'=> 'https://ede8-102-212-11-14.ngrok-free.app/ecommerce/public/transact/validation.php',
 );
 
 $data_string = json_encode($curl_post_data);
