@@ -12,7 +12,7 @@ $response = '{
 $mpesaResponse = file_get_contents('php://input');
 
 //log the response
-$logFile = "M_PESAConfirmationResponse.txt";
+$logFile = "M_PESAConfirmationResponse.json";
 $jsonMpesaResponse = json_decode($mpesaResponse, true);
 
 //write to file 

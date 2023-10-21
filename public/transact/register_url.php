@@ -8,7 +8,7 @@ curl_setopt($curl, CURLOPT_URL, $url);
 curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Authorization:Bearer '.$access_token)); //Setting custom header
 
 $curl_post_data = array(
-    'ShortCode'=> '600987',
+    'ShortCode'=> '174379',
     'ResponseType'=> 'Completed',
     'ConfirmationURL'=> 'https://e70f-102-212-11-14.ngrok-free.app/ecommerce/public/transact/confirmation.php',
     'ValidationURL'=> 'https://e70f-102-212-11-14.ngrok-free.app/ecommerce/public/transact/validation.php',

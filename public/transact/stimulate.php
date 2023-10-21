@@ -28,11 +28,11 @@ curl_setopt($curl2, CURLOPT_URL, $url);
 curl_setopt($curl2, CURLOPT_HTTPHEADER,array('Content-Type:application/json','Authorization: Bearer '.$access_token));
 
 $curl_post_data = array(
-    'ShortCode'=> '600983',
-    'CommandID'=> 'CustomerPayBillOnline',
-    'Amount'=> '527',
-    'Msisdn'=> '254708374149',
-    'BillRefNumber'=> 'Svr0021'
+    "ShortCode"=> "600977",
+    "CommandID"=> "CustomerPayBillOnline",
+    "Amount"=> "503",
+    "Msisdn"=> "254708374149",
+    "BillRefNumber"=> "inv362"
 );
 
 $data_string = json_encode($curl_post_data);
