@@ -76,12 +76,12 @@ function send_activation_email(string $email, string $activation_code): void
         $mail->isSMTP();                                            
         $mail->Host       = 'smtp.gmail.com';                    
         $mail->SMTPAuth   = true;                             
-        $mail->Username   = 'otienof534@gmail.com';                 
-        $mail->Password   = 'ndyo rsxf pzax kgzt';                        
+        $mail->Username   = SENDER_EMAIL_ADDRESS;                 
+        $mail->Password   = EMAIL_PASSWORD;                        
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;                              
         $mail->Port       = 465;  
  
-        $mail->setFrom(SENDER_EMAIL_ADDRESS, 'Francis');           
+        $mail->setFrom(SENDER_EMAIL_ADDRESS, SENDER_NICKNAME);           
         $mail->addAddress($email);
         
         $mail->isHTML(true);                                  
