@@ -107,29 +107,33 @@ function session_flash(...$keys): array
 }
 
 
-//function of getting products to index.php
+/**
+ * Gets products details from the database
+ * 
+ * Display 8 products in a in a current web page and performs pagination
+ */
 function getproducts()
 {
-    // The amounts of products to show on each page
+    
     $num_products_on_each_page = 8;
-    // The current page - in the URL, will appear as products.php?p=1, products.php?p=2, etc...
+    
     $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
 
     if (!isset($_GET['category_id'])) {
     
     $select_products=db()->prepare("SELECT * FROM products LIMIT ?,?");
     
-    // bindValue will allow us to use an integer in the SQL statement, which we need to use for the LIMIT clause
+    
     $select_products->bindValue(1, ($current_page - 1) * $num_products_on_each_page, PDO::PARAM_INT);
     $select_products->bindValue(2, $num_products_on_each_page, PDO::PARAM_INT);
     $select_products->execute();
     
-    // Fetch the products from the database and return the result as an Array
+    
     $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
 
     
     foreach ($result as $column){
-        //displaying text with more than 50 characters
+       
         $text = $column['product_description'];
         $maxPos = 50;
         if (strlen($text) > $maxPos)
@@ -177,7 +181,7 @@ function getproducts()
       </div>";
     }
 
-    // Get the total number of products
+   
     $total_products = db()->query('SELECT * FROM products')->rowCount();
 
     echo "<div class='buttons'>";
@@ -191,25 +195,26 @@ function getproducts()
 }
 }
 
-
-# search products
+/**
+ * Get the searched product or similar search from the database and display it in the web page and performs pagination.
+ */
 function search_products()
 {
-    // The amounts of products to show on each page
+    
     $num_products_on_each_page = 8;
-    // The current page - in the URL, will appear as products.php?p=1, products.php?p=2, etc...
+    
     $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
 
     if (isset($_GET['search_data_product'])) {
         $product_value=$_GET['search_product'];
     
     $select_products=db()->prepare("SELECT * FROM products WHERE keywords LIKE '%$product_value%' LIMIT ?,?");
-    // bindValue will allow us to use an integer in the SQL statement, which we need to use for the LIMIT clause
+    
     $select_products->bindValue(1, ($current_page - 1) * $num_products_on_each_page, PDO::PARAM_INT);
     $select_products->bindValue(2, $num_products_on_each_page, PDO::PARAM_INT);
     $select_products->execute();
     
-    // Fetch the products from the database and return the result as an Array
+    
     $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
 
     if(count($result)==0){
@@ -217,7 +222,7 @@ function search_products()
         exit;
     }
     foreach ($result as $column){
-        //displaying text with more than 50 characters
+       
         $text = $column['product_description'];
         $maxPos = 25;
         if (strlen($text) > $maxPos)
@@ -265,7 +270,7 @@ function search_products()
       </div>";
     }
 
-     // Get the total number of products
+     
      $total_products = db()->query("SELECT * FROM products WHERE keywords LIKE '%$product_value%'")->rowCount();
 
      echo "<div class='buttons'>";
@@ -279,13 +284,14 @@ function search_products()
 }
 }
 
-
-//getting products from specific categories
+/**
+ * Get products for a specified category from the database and display them in the web page and performs pagination.
+ */
 function  category_products()
 {
-    // The amounts of products to show on each page
+    
     $num_products_on_each_page = 8;
-    // The current page - in the URL, will appear as products.php?p=1, products.php?p=2, etc...
+    
     $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
 
     if (isset($_GET['category_id'])) {
@@ -294,12 +300,10 @@ function  category_products()
     
     $select_products=db()->prepare("SELECT * FROM products WHERE category_id=$category_id LIMIT ?,?");
     
-    // bindValue will allow us to use an integer in the SQL statement, which we need to use for the LIMIT clause
     $select_products->bindValue(1, ($current_page - 1) * $num_products_on_each_page, PDO::PARAM_INT);
     $select_products->bindValue(2, $num_products_on_each_page, PDO::PARAM_INT);
     $select_products->execute();
     
-    // Fetch the products from the database and return the result as an Array
     $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
 
     if (count($result)==0) {
@@ -356,7 +360,7 @@ function  category_products()
       </div>";
     }
 
-    // Get the total number of products
+    
     $total_products = db()->query("SELECT * FROM products WHERE category_id=$category_id")->rowCount();
 
     echo "<div class='buttons'>";
@@ -370,12 +374,14 @@ function  category_products()
 }
 }
 
-//function for getting categories to the dropdown in the index.php file
 
+/**
+ * Retrieve categories existing in the database.
+ */
 function getcategories()
 {
     $select_category=db()->prepare("SELECT * FROM categories");
-    //execute query
+    
     $select_category->execute();
     
     $select_category->setFetchMode(PDO::FETCH_ASSOC);
