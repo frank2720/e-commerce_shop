@@ -1,5 +1,8 @@
 <?php
-function token(){
+/**
+ * Used to access token key, for use in other APIs
+ */
+function access_token(){
     $consumer_key = 'SjZbcsIER1TDuqchIaELunXYCKpdB76K';
     $consumer_secret = 'EFnHQ1maJbY9fr5W';
 
@@ -10,9 +13,9 @@ function token(){
     curl_setopt($ch, CURLOPT_USERPWD, $consumer_key .':'. $consumer_secret);
 
     $response = curl_exec($ch);
-    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    $response = json_decode($response);
+    curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    $response = json_decode($response,true);
     curl_close($ch);
-    echo $response->access_token;
+    echo $response["access_token"];
 }
-?>

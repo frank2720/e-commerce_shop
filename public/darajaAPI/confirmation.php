@@ -1,9 +1,13 @@
 <?php
-header("Content-Type: application/json;charset=utf-8");
+header("Content-Type:application/json");
 
-$MpesaResponse = file_get_contents("php://input");
+$response = '{
+    "ResponseCode":"0",
+    "ResponseDescription":"Confirmation Received Successfully"
+}';
 
-$log = fopen("mpesa_response.json","a");
-fwrite($log, $MpesaResponse);
-fclose($log);
-?>
+$MpesaResponse = file_get_contents('php://input');
+
+$info = fopen('MPESA_Response.txt','a');
+fwrite($info,$MpesaResponse);
+fclose($info);
