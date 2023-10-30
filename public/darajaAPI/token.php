@@ -19,3 +19,4 @@ function access_token(){
     curl_close($ch);
     echo $response["access_token"];
 }
+access_token();

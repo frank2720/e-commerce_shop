@@ -9,6 +9,6 @@ $response = '{
 $MpesaResponse = file_get_contents('php://input');
 $jsonMpesaResponse = json_decode($MpesaResponse, true);
 
-$log = fopen('MPESA_Response.txt','a');
+$log = fopen('MPESA_validation.txt','a');
 fwrite($log,$jsonMpesaResponse);
 fclose($log);
